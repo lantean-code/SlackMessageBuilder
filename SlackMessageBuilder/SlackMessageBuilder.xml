@@ -1,0 +1,1481 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SlackMessageBuilder</name>
+    </assembly>
+    <members>
+        <member name="T:SlackMessageBuilder.ActionsBlock">
+             <summary>
+             A block that is used to hold interactive elements.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#actions">https://api.slack.com/reference/block-kit/blocks#actions</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ActionsBlock.#ctor(System.Collections.Generic.IEnumerable{SlackMessageBuilder.IActionsElement},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ActionsBlock" /> class.
+            </summary>
+            <param name="elements">An array of interactive element objects - buttons, select menus, overflow menus, or date pickers. There is a maximum of 25 elements in each action block.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ActionsBlock.Elements">
+            <summary>
+            An array of interactive element objects - buttons, select menus, overflow menus, or date pickers. There is a maximum of 25 elements in each action block.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.AttachmentBuilderExtensions">
+            <summary>
+            Fluent builder for <see cref="T:SlackMessageBuilder.Attachment" />s.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.Block">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Block.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Block" /> class.
+            </summary>
+            <param name="type">The type of element.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Block.BlockId">
+            <summary>
+            A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.BlockBuilderExtensions">
+            <summary>
+            Fluent builder for <see cref="T:SlackMessageBuilder.Block" />s.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.BlockBuilderExtensions.AddImageBlock(SlackMessageBuilder.IBlocksBuilder,SlackMessageBuilder.ImageBlock)">
+            <summary>
+            Adds an image block.
+            </summary>
+            <param name="builder"></param>
+            <param name="image"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.BlockBuilderExtensions.AddImageBlock(SlackMessageBuilder.IBlocksBuilder,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds an image block.
+            </summary>
+            <param name="builder"></param>
+            <param name="url">The URL of the image to be displayed.</param>
+            <param name="altText">A plain-text summary of the image. This should not contain any markup. Maximum length for this field is 2000 characters.</param>
+            <param name="title">An optional title for the image in the form of a text object that can only be of type: plain_text. Maximum length for the text in this field is 2000 characters.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SlackMessageBuilder.Builders.MessageBuilder">
+            <summary>
+            Fluent builder for <see cref="T:SlackMessageBuilder.SlackMessage" />s.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Builders.MessageBuilder.Build">
+            <summary>
+            Builds a new Slack Message from the builder.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="T:SlackMessageBuilder.Button">
+             <summary>
+             An interactive component that inserts a button. The button can be a trigger for anything from opening a simple link to starting a complex workflow.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#button">https://api.slack.com/reference/block-kit/block-elements#button</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Button.#ctor(SlackMessageBuilder.PlainText,System.String,System.String,System.String,System.Nullable{SlackMessageBuilder.ButtonStyle},SlackMessageBuilder.Confirm,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Button" /> class.
+            </summary>
+            <param name="text">A text object that defines the button's text. Can only be of type: plain_text. text may truncate with ~30 characters. Maximum length for the text in this field is 75 characters.</param>
+            <param name="actionId">An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="url">A URL to load in the user's browser when the button is clicked. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.</param>
+            <param name="value">The value to send along with the interaction payload. Maximum length for this field is 2000 characters.</param>
+            <param name="style">Decorates buttons with alternative visual color schemes. Use this option with restraint.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog after the button is clicked.</param>
+            <param name="accessibilityLabel">A label for longer descriptive text about a button element. This label will be read out by screen readers instead of the button text object. Maximum length for this field is 75 characters.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.Text">
+            <summary>
+            A text object that defines the button's text. Can only be of type: plain_text. text may truncate with ~30 characters. Maximum length for the text in this field is 75 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.ActionId">
+            <summary>
+            An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.Url">
+            <summary>
+            A URL to load in the user's browser when the button is clicked. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.Value">
+            <summary>
+            The value to send along with the interaction payload. Maximum length for this field is 2000 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.Style">
+            <summary>
+            Decorates buttons with alternative visual color schemes. Use this option with restraint.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog after the button is clicked.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Button.AccessibilityLabel">
+            <summary>
+            A label for longer descriptive text about a button element. This label will be read out by screen readers instead of the button text object. Maximum length for this field is 75 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ButtonStyle">
+            <summary>
+            Button style
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ButtonStyle.Default">
+            <summary>
+            Sets 'default' on output.
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ButtonStyle.Primary">
+            <summary>
+            Sets 'primary' on output.
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ButtonStyle.Danger">
+            <summary>
+            Sets 'danger' on output.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.Checkboxes">
+             <summary>
+             A checkbox group that allows a user to choose multiple items from a list of possible options.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#checkboxes">https://api.slack.com/reference/block-kit/block-elements#checkboxes</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Checkboxes.#ctor(System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Checkboxes" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="options">An array of <see cref="T:SlackMessageBuilder.Option" /> objects. A maximum of 10 options are allowed.</param>
+            <param name="initialOptions">An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly matches one or more of the options within options. These options will be selected when the checkbox group initially loads.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the checkboxes in this element.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Checkboxes.ActionId">
+            <summary>
+            An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Checkboxes.Options">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects. A maximum of 10 options are allowed.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Checkboxes.InitialOptions">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly matches one or more of the options within options. These options will be selected when the checkbox group initially loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Checkboxes.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the checkboxes in this element.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Checkboxes.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.Confirm">
+             <summary>
+             An object that defines a dialog that provides a confirmation step to any interactive element. This dialog will ask the user to confirm their action by offering a confirm and deny buttons.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#confirm">https://api.slack.com/reference/block-kit/composition-objects#confirm</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Confirm.#ctor(SlackMessageBuilder.PlainText,SlackMessageBuilder.TextObject,SlackMessageBuilder.PlainText,SlackMessageBuilder.PlainText,System.Nullable{SlackMessageBuilder.ButtonStyle})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Confirm" /> class.
+            </summary>
+            <param name="title">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the dialog's title. Maximum length for this field is 100 characters.</param>
+            <param name="text">A <see cref="T:SlackMessageBuilder.TextObject" /> object that defines the explanatory text that appears in the confirm dialog. Maximum length for the text in this field is 300 characters.</param>
+            <param name="confirmButtonText">A <see cref="T:SlackMessageBuilder.PlainText" /> object object to define the text of the button that confirms the action. Maximum length for the text in this field is 30 characters.</param>
+            <param name="denyButtonText">A <see cref="T:SlackMessageBuilder.PlainText" /> object to define the text of the button that cancels the action. Maximum length for the text in this field is 30 characters.</param>
+            <param name="style">Defines the color scheme applied to the confirm button. A value of danger will display the button with a red background on desktop, or red text on mobile. A value of primary will display the button with a green background on desktop, or blue text on mobile. If this field is not provided, the default value will be primary.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Confirm.Title">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the dialog's title. Maximum length for this field is 100 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Confirm.Text">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.TextObject" /> object that defines the explanatory text that appears in the confirm dialog. Maximum length for the text in this field is 300 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Confirm.ConfirmButtonText">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object object to define the text of the button that confirms the action. Maximum length for the text in this field is 30 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Confirm.DenyButtonText">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object to define the text of the button that cancels the action. Maximum length for the text in this field is 30 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Confirm.Style">
+            <summary>
+            Defines the color scheme applied to the confirm button. A value of danger will display the button with a red background on desktop, or red text on mobile. A value of primary will display the button with a green background on desktop, or blue text on mobile. If this field is not provided, the default value will be primary.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ContextBlock">
+             <summary>
+             Displays message context, which can include both images and text.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#context">https://api.slack.com/reference/block-kit/blocks#context</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ContextBlock.#ctor(System.Collections.Generic.IEnumerable{SlackMessageBuilder.IContextElement},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ContextBlock" /> class.
+            </summary>
+            <param name="elements">An array of image elements and text objects. Maximum number of items is 10.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ContextBlock.Elements">
+            <summary>
+            An array of image elements and text objects. Maximum number of items is 10.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ConversationFilter">
+             <summary>
+             Provides a way to filter the list of options in a conversations select menu or conversations multi-select menu.
+
+             Please note that while none of the fields are individually required, you must supply at least one of these fields.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#filter_conversations">https://api.slack.com/reference/block-kit/composition-objects#filter_conversations</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ConversationFilter.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ConversationFilter" /> class.
+            </summary>
+            <param name="include">Indicates which type of conversations should be included in the list. When this field is provided, any conversations that do not match will be excluded. You should provide an array of strings from the following options: im, mpim, private, and public. The array cannot be empty.</param>
+            <param name="excludeExternalSharedChannels">Indicates whether to exclude external <a href="https://api.slack.com/enterprise/shared-channels">shared channels</a> from conversation lists. Defaults to false.</param>
+            <param name="excludeBotUsers">Indicates whether to exclude bot users from conversation lists. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationFilter.Include">
+            <summary>
+            Indicates which type of conversations should be included in the list. When this field is provided, any conversations that do not match will be excluded. You should provide an array of strings from the following options: im, mpim, private, and public. The array cannot be empty.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationFilter.ExcludeExternalSharedChannels">
+            <summary>
+            Indicates whether to exclude external <a href="https://api.slack.com/enterprise/shared-channels">shared channels</a> from conversation lists. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationFilter.ExcludeBotUsers">
+            <summary>
+            Indicates whether to exclude bot users from conversation lists. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ConversationFilterOptions">
+             <summary>
+             </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.IncludeIm">
+            <summary>
+            im
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.IncludeMpim">
+            <summary>
+            mpim
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.IncludePrivate">
+            <summary>
+            private
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.IncludePublic">
+            <summary>
+            public
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.ExcludeExternalSharedChannels">
+            <summary>
+            exclude_external_shared_channels
+            </summary>
+        </member>
+        <member name="F:SlackMessageBuilder.ConversationFilterOptions.ExcludeBotUsers">
+            <summary>
+            exclude_bot_users
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ConversationsMultiSelect">
+             <summary>
+             This multi-select menu will populate its options with a list of public and private channels, DMs, and MPIMs visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#conversation_multi_select">https://api.slack.com/reference/block-kit/block-elements#conversation_multi_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ConversationsMultiSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{System.String},SlackMessageBuilder.ConversationFilter,System.Boolean,System.Boolean,System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ConversationsMultiSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialConversations">An array of one or more IDs of any valid conversations to be pre-selected when the menu loads. If default_to_current_conversation is also supplied, initial_conversations will be ignored.</param>
+            <param name="defaultToCurrentConversation">Pre-populates the select menu with the conversation that the user was viewing when they opened the modal, if available. Default is false.</param>
+            <param name="maxSelectedItems">Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="responseUrlEnabled">When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target conversation for the message will be determined by the value of this select menu.</param>
+            <param name="filter">A <see cref="T:SlackMessageBuilder.ConversationFilter" /> object that reduces the list of available conversations using the specified criteria.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsMultiSelect.InitialConversations">
+            <summary>
+            An array of one or more IDs of any valid conversations to be pre-selected when the menu loads. If default_to_current_conversation is also supplied, initial_conversations will be ignored.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsMultiSelect.MaxSelectedItems">
+            <summary>
+            Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ConversationsSelect">
+             <summary>
+             This select menu will populate its options with a list of public and private channels, DMs, and MPIMs visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#conversation_select">https://api.slack.com/reference/block-kit/block-elements#conversation_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ConversationsSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.String,SlackMessageBuilder.ConversationFilter,System.Boolean,System.Boolean,SlackMessageBuilder.Confirm,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ConversationsSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialConversation">The ID of any valid conversation to be pre-selected when the menu loads. If default_to_current_conversation is also supplied, initial_conversation will take precedence.</param>
+            <param name="defaultToCurrentConversation">Pre-populates the select menu with the conversation that the user was viewing when they opened the modal, if available. Default is false.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="responseUrlEnabled">When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target conversation for the message will be determined by the value of this select menu.</param>
+            <param name="filter">A <see cref="T:SlackMessageBuilder.ConversationFilter" /> object that reduces the list of available conversations using the specified criteria.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsSelect.InitialConversation">
+            <summary>
+            The ID of any valid conversation to be pre-selected when the menu loads. If default_to_current_conversation is also supplied, initial_conversation will take precedence.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ConversationsSelectBase">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ConversationsSelectBase.#ctor(System.Boolean,SlackMessageBuilder.PlainText,System.String,SlackMessageBuilder.ConversationFilter,System.Boolean,System.Boolean,SlackMessageBuilder.Confirm,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ConversationsSelectBase" /> class.
+            </summary>
+            <param name="isMultiSelect">Indicates whether the element will be a multi select.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="defaultToCurrentConversation">Pre-populates the select menu with the conversation that the user was viewing when they opened the modal, if available. Default is false.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="responseUrlEnabled">When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target conversation for the message will be determined by the value of this select menu.</param>
+            <param name="filter">A <see cref="T:SlackMessageBuilder.ConversationFilter" /> object that reduces the list of available conversations using the specified criteria.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsSelectBase.DefaultToCurrentConversation">
+            <summary>
+            Pre-populates the select menu with the conversation that the user was viewing when they opened the modal, if available. Default is false.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsSelectBase.ResponseUrlEnabled">
+            <summary>
+            When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target conversation for the message will be determined by the value of this select menu.
+            </summary>
+            <remarks>
+            This field only works with menus in input blocks in modals.
+            </remarks>
+        </member>
+        <member name="P:SlackMessageBuilder.ConversationsSelectBase.Filter">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.ConversationFilter" /> object that reduces the list of available conversations using the specified criteria.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.Converters.JsonStringToLowerEnumConverter">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Converters.JsonStringToLowerEnumConverter.CanConvert(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:SlackMessageBuilder.Converters.JsonStringToLowerEnumConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="T:SlackMessageBuilder.DatePicker">
+             <summary>
+             An element which lets users easily select a date from a calendar style UI.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#datepicker">https://api.slack.com/reference/block-kit/block-elements#datepicker</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.DatePicker.#ctor(System.String,SlackMessageBuilder.PlainText,System.Nullable{System.DateTime},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initilizes a new instance of the <see cref="T:SlackMessageBuilder.DatePicker" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="placeholder"></param>
+            <param name="initialDate"></param>
+            <param name="confirmDialog"></param>
+            <param name="focusOnLoad"></param>
+        </member>
+        <member name="P:SlackMessageBuilder.DatePicker.ActionId">
+            <summary>
+            An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.DatePicker.Placeholder">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the datepicker. Maximum length for the text in this field is 150 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.DatePicker.InitialDate">
+            <summary>
+            The initial date that is selected when the element is loaded. This should be in the format YYYY-MM-DD.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.DatePicker.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a date is selected.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.DatePicker.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.DispatchActionConfig">
+             <summary>
+             Determines when a plain-text input element will return a block_actions interaction payload.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#dispatch_action_config">https://api.slack.com/reference/block-kit/composition-objects#dispatch_action_config</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.DispatchActionConfig.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.DispatchActionConfig" /> class.
+            </summary>
+            <param name="triggerActionsOn">An array of interaction types that you would like to receive a block_actions payload for.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.DispatchActionConfig.TriggerActionsOn">
+             <summary>
+             An array of interaction types that you would like to receive a block_actions payload for. Should be one or both of:
+
+             on_enter_pressed — payload is dispatched when user presses the enter key while the input is in focus.Hint text will appear underneath the input explaining to the user to press enter to submit.
+             on_character_entered — payload is dispatched when a character is entered (or removed) in the input.
+             </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.DividerBlock">
+             <summary>
+             A content divider, like an &gt;hr&lt;, to split up different blocks inside of a message. The divider block is nice and neat, requiring only a type.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#divider">https://api.slack.com/reference/block-kit/blocks#divider</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.DividerBlock.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.DividerBlock" /> class.
+            </summary>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="T:SlackMessageBuilder.ExternalDataMultiSelect">
+             <summary>
+             This menu will load its options from an external data source, allowing for a dynamic list of options.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#external_multi_select">https://api.slack.com/reference/block-kit/block-elements#external_multi_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ExternalDataMultiSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ExternalDataMultiSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="minQueryLength">When the typeahead field is used, a request will be sent on every character change. If you prefer fewer requests or more fully ideated queries, use the min_query_length attribute to tell Slack the fewest number of typed characters required before dispatch. The default value is 3.</param>
+            <param name="initialOptions">An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly match one or more of the options within options or option_groups. These options will be selected when the menu initially loads.</param>
+            <param name="maxSelectedItems">Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ExternalDataMultiSelect.InitialOptions">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly match one or more of the options within options or option_groups. These options will be selected when the menu initially loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ExternalDataMultiSelect.MaxSelectedItems">
+            <summary>
+            Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ExternalDataSelect">
+             <summary>
+             This select menu will load its options from an external data source, allowing for a dynamic list of options.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#external_select">https://api.slack.com/reference/block-kit/block-elements#external_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ExternalDataSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Nullable{System.Int32},SlackMessageBuilder.Option,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ExternalDataSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="minQueryLength">When the typeahead field is used, a request will be sent on every character change. If you prefer fewer requests or more fully ideated queries, use the min_query_length attribute to tell Slack the fewest number of typed characters required before dispatch. The default value is 3.</param>
+            <param name="initialOption">A single option that exactly matches one of the options within the options or option_groups loaded from the external data source. This option will be selected when the menu initially loads.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ExternalDataSelect.InitialOption">
+            <summary>
+            A single option that exactly matches one of the options within the options or option_groups loaded from the external data source. This option will be selected when the menu initially loads.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ExternalDataSelectBase">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ExternalDataSelectBase.#ctor(System.Boolean,SlackMessageBuilder.PlainText,System.String,System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ExternalDataSelectBase" /> class.
+            </summary>
+            <param name="isMultiSelect">Indicates whether the element will be a multi select.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="minQueryLength">When the typeahead field is used, a request will be sent on every character change. If you prefer fewer requests or more fully ideated queries, use the min_query_length attribute to tell Slack the fewest number of typed characters required before dispatch. The default value is 3.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ExternalDataSelectBase.MinQueryLength">
+            <summary>
+            When the typeahead field is used, a request will be sent on every character change. If you prefer fewer requests or more fully ideated queries, use the min_query_length attribute to tell Slack the fewest number of typed characters required before dispatch. The default value is 3.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.HeaderBlock">
+             <summary>
+             A header is a plain-text block that displays in a larger, bold font. Use it to delineate between different groups of content in your app's surfaces.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#header">https://api.slack.com/reference/block-kit/blocks#header</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.HeaderBlock.#ctor(SlackMessageBuilder.PlainText,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.HeaderBlock" /> class.
+            </summary>
+            <param name="headerText">The text for the block, in the form of a plain_text text object. Maximum length for the text in this field is 150 characters.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.HeaderBlock.Text">
+            <summary>
+            The text for the block, in the form of a plain_text text object. Maximum length for the text in this field is 150 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.IActionsElement">
+            <summary>
+            An element that can be added to an actions block.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.IBlockElement">
+            <summary>
+            An element that can be added to the blocks array.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.IContextElement">
+            <summary>
+            An element that can be added to a context block.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.IElementBuilder`1">
+            <summary>
+            A builder that can create a single element.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:SlackMessageBuilder.IElementsBuilder`1">
+            <summary>
+            A builder that can create a list of elements
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:SlackMessageBuilder.IElementsBuilder`1.AddElement(`0)">
+            <summary>
+            Adds an element to the builder.
+            </summary>
+            <param name="element">The element to be added.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SlackMessageBuilder.IInputElement">
+            <summary>
+            An element that can be added to an input block.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ImageBlock">
+             <summary>
+             A simple image block, designed to make those cat photos really pop.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#image">https://api.slack.com/reference/block-kit/blocks#image</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ImageBlock.#ctor(System.String,System.String,SlackMessageBuilder.PlainText,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ImageBlock" /> class.
+            </summary>
+            <param name="url">The URL of the image to be displayed.</param>
+            <param name="alternativeText">A plain-text summary of the image. This should not contain any markup. Maximum length for this field is 2000 characters.</param>
+            <param name="title">An optional title for the image in the form of a text object that can only be of type: plain_text. Maximum length for the text in this field is 2000 characters.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, one will be generated. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ImageBlock.Url">
+            <summary>
+            The URL of the image to be displayed.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ImageBlock.AlternativeText">
+            <summary>
+            A plain-text summary of the image. This should not contain any markup. Maximum length for this field is 2000 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ImageBlock.Title">
+            <summary>
+            An optional title for the image in the form of a text object that can only be of type: plain_text. Maximum length for the text in this field is 2000 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ImageElement">
+            <summary>
+            An element to insert an image as part of a larger block of content.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.ImageElement.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.ImageElement" /> class.
+            </summary>
+            <param name="url">The URL of the image to be displayed.</param>
+            <param name="alternativeText">A plain-text summary of the image. This should not contain any markup.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.ImageElement.Url">
+            <summary>
+            The URL of the image to be displayed.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.ImageElement.AlternativeText">
+            <summary>
+            A plain-text summary of the image. This should not contain any markup.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.InputBlock">
+             <summary>
+             A block that collects information from users - it can hold a plain-text input element, a checkbox element, a radio button element, a select menu element, a multi-select menu element, or a datepicker.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#input">https://api.slack.com/reference/block-kit/blocks#input</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.InputBlock.#ctor(SlackMessageBuilder.PlainText,SlackMessageBuilder.IInputElement,System.Nullable{System.Boolean},SlackMessageBuilder.PlainText,System.Nullable{System.Boolean},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.InputBlock" /> class.
+            </summary>
+            <param name="label">A label that appears above an input element in the form of a text object that must have type of plain_text. Maximum length for the text in this field is 2000 characters.</param>
+            <param name="element">A <see cref="T:SlackMessageBuilder.PlainTextInput" /> element, a <see cref="T:SlackMessageBuilder.Checkboxes" /> element, a <see cref="T:SlackMessageBuilder.RadioButtons" /> element, a <see cref="T:SlackMessageBuilder.SelectMenu" /> element, a <see cref="T:SlackMessageBuilder.DatePicker" /> or a <see cref="T:SlackMessageBuilder.TimePicker" />.</param>
+            <param name="dispatchAction">A boolean that indicates whether or not the use of elements in this block should dispatch a block_actions payload. Defaults to false.</param>
+            <param name="hint">An optional hint that appears below an input element in a lighter grey. It must be a text object with a type of plain_text. Maximum length for the text in this field is 2000 characters.</param>
+            <param name="optional">A boolean that indicates whether the input element may be empty when a user submits the modal. Defaults to false.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.InputBlock.Label">
+            <summary>
+            A label that appears above an input element in the form of a text object that must have type of plain_text. Maximum length for the text in this field is 2000 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.InputBlock.Element">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainTextInput" /> element, a <see cref="T:SlackMessageBuilder.Checkboxes" /> element, a <see cref="T:SlackMessageBuilder.RadioButtons" /> element, a <see cref="T:SlackMessageBuilder.SelectMenu" /> element, a <see cref="T:SlackMessageBuilder.DatePicker" /> or a <see cref="T:SlackMessageBuilder.TimePicker" />.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.InputBlock.DispatchAction">
+            <summary>
+            A boolean that indicates whether or not the use of elements in this block should dispatch a block_actions payload. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.InputBlock.Hint">
+            <summary>
+            An optional hint that appears below an input element in a lighter grey. It must be a text object with a type of plain_text. Maximum length for the text in this field is 2000 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.InputBlock.Optional">
+            <summary>
+            A boolean that indicates whether the input element may be empty when a user submits the modal. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.ISectionElement">
+            <summary>
+            An element that can be added to a section block.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.MarkdownText">
+             <summary>
+             An object containing some text, formatted using mrkdwn, our proprietary contribution to the much beloved Markdown standard.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#text">https://api.slack.com/reference/block-kit/composition-objects#text</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.MarkdownText.#ctor(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.MarkdownText" /> class.
+            </summary>
+            <param name="text">The text for the block. This field accepts any of the standard text formatting markup when type is mrkdwn. The maximum length is 3000 characters.</param>
+            <param name="verbatim">When set to false (as is default) URLs will be auto-converted into links, conversation names will be link-ified, and certain mentions will be <a href="https://api.slack.com/reference/surfaces/formatting#automatic-parsing">automatically parsed</a>. Using a value of true will skip any preprocessing of this nature, although you can still include manual parsing strings.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.MarkdownText.Verbatim">
+            <summary>
+            When set to false (as is default) URLs will be auto-converted into links, conversation names will be link-ified, and certain mentions will be <a href="https://api.slack.com/reference/surfaces/formatting#automatic-parsing">automatically parsed</a>. Using a value of true will skip any preprocessing of this nature, although you can still include manual parsing strings.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.MessageBuilderExtensions">
+            <summary>
+            Fluent builder for <see cref="T:SlackMessageBuilder.SlackMessage" />s.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.AsReply(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
+            <summary>
+            Sets the thread id. Output: sets `thread_ts` property to the value.
+            </summary>
+            <param name="builder"></param>
+            <param name="threadId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithText(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
+            <summary>
+            Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'false'.
+            </summary>
+            <param name="builder"></param>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithMarkdown(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
+            <summary>
+            Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'true' on the JSON.
+            </summary>
+            <param name="builder"></param>
+            <param name="markdownText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithAttachment(SlackMessageBuilder.Builders.MessageBuilder,System.Action{SlackMessageBuilder.Builders.AttachmentBuilder})">
+            <summary>
+            Adds an attachement to the message using the <see cref="T:SlackMessageBuilder.Builders.AttachmentBuilder" />.
+            </summary>
+            <param name="builder"></param>
+            <param name="attachmentBuilderAction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithAttachment(SlackMessageBuilder.Builders.MessageBuilder,SlackMessageBuilder.Attachment)">
+            <summary>
+            Adds an attachment to the message.
+            </summary>
+            <param name="builder"></param>
+            <param name="slackAttachment"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithBlocks(SlackMessageBuilder.Builders.MessageBuilder,System.Action{SlackMessageBuilder.IBlocksBuilder})">
+            <summary>
+            Adds blocks to the message using the <see cref="T:SlackMessageBuilder.BlocksBuilder" />.
+            </summary>
+            <param name="builder"></param>
+            <param name="blocksBuilderAction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SlackMessageBuilder.Option">
+             <summary>
+             An object that represents a single selectable item in a select menu, multi-select menu, checkbox group, radio button group, or overflow menu.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#option">https://api.slack.com/reference/block-kit/composition-objects#option</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Option.#ctor(SlackMessageBuilder.TextObject,System.String,SlackMessageBuilder.PlainText,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Option" /> class.
+            </summary>
+            <param name="text">A text object that defines the text shown in the option on the menu. Overflow, select, and multi-select menus can only use <see cref="T:SlackMessageBuilder.PlainText" /> objects, while radio buttons and checkboxes can use <see cref="T:SlackMessageBuilder.MarkdownText" /> objects. Maximum length for the text in this field is 75 characters.</param>
+            <param name="value">A unique string value that will be passed to your app when this option is chosen.Maximum length for this field is 75 characters.</param>
+            <param name="description">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines a line of descriptive text shown below the text field beside the radio button. Maximum length for the text object within this field is 75 characters.</param>
+            <param name="url">A URL to load in the user's browser when the option is clicked. The url attribute is only available in overflow menus. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Option.Text">
+            <summary>
+            A text object that defines the text shown in the option on the menu. Overflow, select, and multi-select menus can only use <see cref="T:SlackMessageBuilder.PlainText" /> objects, while radio buttons and checkboxes can use <see cref="T:SlackMessageBuilder.MarkdownText" /> objects. Maximum length for the text in this field is 75 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Option.Value">
+            <summary>
+            A unique string value that will be passed to your app when this option is chosen.Maximum length for this field is 75 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Option.Description">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines a line of descriptive text shown below the text field beside the radio button. Maximum length for the text object within this field is 75 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Option.Url">
+            <summary>
+            A URL to load in the user's browser when the option is clicked. The url attribute is only available in overflow menus. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.OptionsGroup">
+             <summary>
+             Provides a way to group options in a select menu or multi-select menu.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#option_group">https://api.slack.com/reference/block-kit/composition-objects#option_group</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.OptionsGroup.#ctor(SlackMessageBuilder.PlainText,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.OptionsGroup" /> class.
+            </summary>
+            <param name="label">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the label shown above this group of options. Maximum length for the text in this field is 75 characters.</param>
+            <param name="options">An array of <see cref="T:SlackMessageBuilder.Option" /> objects that belong to this specific group. Maximum of 100 items.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.OptionsGroup.Label">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the label shown above this group of options. Maximum length for the text in this field is 75 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.OptionsGroup.Options">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects that belong to this specific group. Maximum of 100 items.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.Overflow">
+             <summary>
+             This is like a cross between a button and a select menu - when a user clicks on this overflow button, they will be presented with a list of options to choose from. Unlike the select menu, there is no typeahead field, and the button always appears with an ellipsis ("…") rather than customisable text.
+
+             As such, it is usually used if you want a more compact layout than a select menu, or to supply a list of less visually important actions after a row of buttons.You can also specify simple URL links as overflow menu options, instead of actions.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#overflow">https://api.slack.com/reference/block-kit/block-elements#overflow</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.Overflow.#ctor(System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},SlackMessageBuilder.Confirm)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.Overflow" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="options">An array of up to five option objects to display in the menu.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.Overflow.ActionId">
+            <summary>
+            An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Overflow.Options">
+            <summary>
+            An array of up to five option objects to display in the menu.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.Overflow.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.PlainText">
+             <summary>
+             An object containing some text, formatted either as plain_text.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#text">https://api.slack.com/reference/block-kit/composition-objects#text</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PlainText.#ctor(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PlainText" /> class.
+            </summary>
+            <param name="text">The text for the block. This field accepts any of the standard text formatting markup when type is mrkdwn. The maximum length is 3000 characters.</param>
+            <param name="emoji">Indicates whether emojis in a text field should be escaped into the colon emoji format.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainText.Emoji">
+            <summary>
+            Indicates whether emojis in a text field should be escaped into the colon emoji format.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.PlainTextInput">
+             <summary>
+             A plain-text input, similar to the HTML &lt;input&gt; tag, creates a field where a user can enter freeform data. It can appear as a single-line field or a larger text area using the multiline flag.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#input">https://api.slack.com/reference/block-kit/block-elements#input</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PlainTextInput.#ctor(System.String,SlackMessageBuilder.PlainText,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},SlackMessageBuilder.DispatchActionConfig,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PlainTextInput" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown in the plain-text input. Maximum length for the text in this field is 150 characters.</param>
+            <param name="initialValue">The initial value in the plain-text input when it is loaded.</param>
+            <param name="multiline">Indicates whether the input will be a single line (false) or a larger textarea (true). Defaults to false.</param>
+            <param name="minLength">The minimum length of input that the user must provide. If the user provides less, they will receive an error. Maximum value is 3000.</param>
+            <param name="maxLength">The maximum length of input that the user can provide. If the user provides more, they will receive an error.</param>
+            <param name="dispatchActionConfig">A dispatch configuration object that determines when during text input the element returns a block_actions payload.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.ActionId">
+            <summary>
+            An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.Placeholder">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown in the plain-text input. Maximum length for the text in this field is 150 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.InitialValue">
+            <summary>
+            The initial value in the plain-text input when it is loaded.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.Multiline">
+            <summary>
+            Indicates whether the input will be a single line (false) or a larger textarea (true). Defaults to false.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.MinLength">
+            <summary>
+            The minimum length of input that the user must provide. If the user provides less, they will receive an error. Maximum value is 3000.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.MaxLength">
+            <summary>
+            The maximum length of input that the user can provide. If the user provides more, they will receive an error.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.DispatchActionConfig">
+            <summary>
+            A dispatch configuration object that determines when during text input the element returns a block_actions payload.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PlainTextInput.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.PlainTextOption">
+             <summary>
+             An object that represents a single selectable item in a select menu, multi-select menu, checkbox group, radio button group, or overflow menu.
+
+             <a href="https://api.slack.com/reference/block-kit/composition-objects#option">https://api.slack.com/reference/block-kit/composition-objects#option</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PlainTextOption.#ctor(SlackMessageBuilder.PlainText,System.String,SlackMessageBuilder.PlainText,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PlainTextOption" /> class.
+            </summary>
+            <param name="text">A text object that defines the text shown in the option on the menu. Overflow, select, and multi-select menus can only use <see cref="T:SlackMessageBuilder.PlainText" /> objects, while radio buttons and checkboxes can use <see cref="T:SlackMessageBuilder.MarkdownText" /> objects. Maximum length for the text in this field is 75 characters.</param>
+            <param name="value">A unique string value that will be passed to your app when this option is chosen.Maximum length for this field is 75 characters.</param>
+            <param name="description">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines a line of descriptive text shown below the text field beside the radio button. Maximum length for the text object within this field is 75 characters.</param>
+            <param name="url">A URL to load in the user's browser when the option is clicked. The url attribute is only available in overflow menus. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.</param>
+        </member>
+        <member name="T:SlackMessageBuilder.PublicChannelsMultiSelect">
+             <summary>
+             This multi-select menu will populate its options with a list of public channels visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#channel_multi_select">https://api.slack.com/reference/block-kit/block-elements#channel_multi_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PublicChannelsMultiSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PublicChannelsMultiSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialChannels">An array of one or more IDs of any valid public channel to be pre-selected when the menu loads.</param>
+            <param name="maxSelectedItems">Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.PublicChannelsMultiSelect.InitialChannels">
+            <summary>
+            An array of one or more IDs of any valid public channel to be pre-selected when the menu loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PublicChannelsMultiSelect.MaxSelectedItems">
+            <summary>
+            Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.PublicChannelsSelect">
+             <summary>
+             This select menu will populate its options with a list of public channels visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#channel_select">https://api.slack.com/reference/block-kit/block-elements#channel_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PublicChannelsSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.String,System.Nullable{System.Boolean},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PublicChannelsSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialChannel">The ID of any valid public channel to be pre-selected when the menu loads.</param>
+            <param name="responseUrlEnabled">When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target channel for the message will be determined by the value of this select menu.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.PublicChannelsSelect.InitialChannel">
+            <summary>
+            The ID of any valid public channel to be pre-selected when the menu loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.PublicChannelsSelect.ResponseUrlEnabled">
+            <summary>
+            When set to true, the view_submission payload from the menu's parent view will contain a response_url. This response_url can be used for message responses. The target channel for the message will be determined by the value of this select menu.
+            </summary>
+            <remarks>
+            This field only works with menus in input blocks in modals.
+            </remarks>
+        </member>
+        <member name="T:SlackMessageBuilder.PublicChannelsSelectBase">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.PublicChannelsSelectBase.#ctor(System.Boolean,SlackMessageBuilder.PlainText,System.String,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.PublicChannelsSelectBase" /> class.
+            </summary>
+            <param name="isMultiSelect">Indicates whether the element will be a multi select.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="T:SlackMessageBuilder.RadioButtons">
+             <summary>
+             A radio button group that allows a user to choose one item from a list of possible options.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#radio">https://api.slack.com/reference/block-kit/block-elements#radio</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.RadioButtons.#ctor(System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},SlackMessageBuilder.Option,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.RadioButtons" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="options">An array of <see cref="T:SlackMessageBuilder.Option" /> objects. A maximum of 10 options are allowed.</param>
+            <param name="initialOption">An <see cref="T:SlackMessageBuilder.Option" /> object that exactly matches one of the options within options. This option will be selected when the radio button group initially loads.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the radio buttons in this element.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.RadioButtons.ActionId">
+            <summary>
+            An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.RadioButtons.Options">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects. A maximum of 10 options are allowed.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.RadioButtons.InitialOption">
+            <summary>
+            An <see cref="T:SlackMessageBuilder.Option" /> object that exactly matches one of the options within options. This option will be selected when the radio button group initially loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.RadioButtons.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the radio buttons in this element.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.RadioButtons.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.SectionBlock">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SectionBlock.#ctor(SlackMessageBuilder.ISectionElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SectionBlock" /> class.
+            </summary>
+            <param name="accessory">One of the available element objects.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.SectionBlock.Accessory">
+            <summary>
+            One of the available element objects.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.SelectMenu">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SelectMenu.#ctor(System.String,SlackMessageBuilder.PlainText,System.String,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SelectMenu" /> class.
+            </summary>
+            <param name="type">The type of element.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.SelectMenu.Placeholder">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SelectMenu.ActionId">
+            <summary>
+            An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SelectMenu.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SelectMenu.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.Channel">
+            <summary>
+            Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.UnfurlLinks">
+            <summary>
+            Pass true to enable unfurling of primarily text-based content.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.UnfurlMedia">
+            <summary>
+            Pass false to disable unfurling of media content.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.SlackJsonSerializerOptions">
+             <summary>
+             </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackJsonSerializerOptions.Options">
+             <summary>
+             </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.SlackMessage">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackMessage.#ctor(System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement},System.Collections.Generic.IEnumerable{SlackMessageBuilder.Attachment},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SlackMessage" /> class.
+            </summary>
+            <param name="text">The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.</param>
+            <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
+            <param name="blocks">An array of layout blocks in the same format as described in the building blocks guide.</param>
+            <param name="attachments">An array of legacy secondary attachments. We recommend you use blocks instead.</param>
+            <param name="threadId">The ID of another un-threaded message to reply to.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessage.Text">
+            <summary>
+            The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessage.IsMarkdown">
+            <summary>
+            Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessage.Blocks">
+            <summary>
+            An array of layout blocks in the same format as described in the building blocks guide.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessage.Attachments">
+            <summary>
+            An array of legacy secondary attachments. We recommend you use blocks instead.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessage.ThreadId">
+            <summary>
+            The ID of another un-threaded message to reply to.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.StaticMultiSelect">
+             <summary>
+             This is the simplest form of multi select menu, with a static list of options passed in when defining the element.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#static_multi_select">https://api.slack.com/reference/block-kit/block-elements#static_multi_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.StaticMultiSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Collections.Generic.IEnumerable{SlackMessageBuilder.OptionsGroup},System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.StaticMultiSelect" /> class.
+            </summary>
+            <param name="placeholder"></param>
+            <param name="actionId"></param>
+            <param name="options"></param>
+            <param name="optionGroups"></param>
+            <param name="initialOptions">An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly match one or more of the options within options or option_groups. These options will be selected when the menu initially loads.</param>
+            <param name="confirm"></param>
+            <param name="maxSelectedItems"></param>
+            <param name="focusOnLoad"></param>
+        </member>
+        <member name="P:SlackMessageBuilder.StaticMultiSelect.InitialOptions">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects that exactly match one or more of the options within options or option_groups. These options will be selected when the menu initially loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.StaticMultiSelect.MaxSelectedItems">
+            <summary>
+            Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.StaticSelect">
+             <summary>
+             This is the simplest form of select menu, with a static list of options passed in when defining the element.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#static_select">https://api.slack.com/reference/block-kit/block-elements#static_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.StaticSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Collections.Generic.IEnumerable{SlackMessageBuilder.OptionsGroup},SlackMessageBuilder.Option,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+             <summary>
+             </summary>
+             <param name="placeholder"></param>
+             <param name="actionId"></param>
+             <param name="options"></param>
+             <param name="optionGroups"></param>
+             <param name="initalOption"></param>
+             <param name="confirmDialog"></param>
+             <param name="focusOnLoad"></param>
+        </member>
+        <member name="P:SlackMessageBuilder.StaticSelect.InitalOption">
+            <summary>
+            A single option that exactly matches one of the options within options or option_groups. This option will be selected when the menu initially loads.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.StaticSelectBase">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.StaticSelectBase.#ctor(System.Boolean,SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Option},System.Collections.Generic.IEnumerable{SlackMessageBuilder.OptionsGroup},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+             <summary>
+             </summary>
+             <param name="isMultiSelect"></param>
+             <param name="placeholder"></param>
+             <param name="actionId"></param>
+             <param name="options"></param>
+             <param name="optionGroups"></param>
+             <param name="confirm"></param>
+             <param name="focusOnLoad"></param>
+             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="P:SlackMessageBuilder.StaticSelectBase.Options">
+            <summary>
+            An array of <see cref="T:SlackMessageBuilder.Option" /> objects. Maximum number of options is 100. If option_groups is specified, this field should not be.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.StaticSelectBase.OptionGroups">
+            <summary>
+            An array of <see cref="P:SlackMessageBuilder.StaticSelectBase.OptionGroups" /> objects. Maximum number of option groups is 100. If options is specified, this field should not be.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.TextFieldsSectionBlock">
+             <summary>
+             A section is one of the most flexible blocks available - it can be used as a simple text block, in combination with text fields, or side-by-side with any of the available block elements.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#section"></a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.TextFieldsSectionBlock.#ctor(System.Collections.Generic.IEnumerable{SlackMessageBuilder.PlainText},SlackMessageBuilder.ISectionElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.TextFieldsSectionBlock" /> class.
+            </summary>
+            <param name="fields">An array of text objects. Any text objects included with fields will be rendered in a compact format that allows for 2 columns of side-by-side text. Maximum number of items is 10. Maximum length for the text in each item is 2000 characters.</param>
+            <param name="accessory">One of the available element objects.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.TextFieldsSectionBlock.Fields">
+            <summary>
+            An array of text objects. Any text objects included with fields will be rendered in a compact format that allows for 2 columns of side-by-side text. Maximum number of items is 10. Maximum length for the text in each item is 2000 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.TextObject">
+            <summary>
+            An object containing some text, formatted either as plain_text or using mrkdwn, our proprietary contribution to the much beloved Markdown standard.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.TextObject.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.TextObject" /> class.
+            </summary>
+            <param name="type"></param>
+            <param name="text"></param>
+        </member>
+        <member name="P:SlackMessageBuilder.TextObject.Text">
+            <summary>
+            The text for the block. This field accepts any of the standard text formatting markup when type is mrkdwn. The maximum length is 3000 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.TextSectionBlock">
+             <summary>
+             A section is one of the most flexible blocks available - it can be used as a simple text block, in combination with text fields, or side-by-side with any of the available block elements.
+
+             <a href="https://api.slack.com/reference/block-kit/blocks#section"></a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.TextSectionBlock.#ctor(SlackMessageBuilder.TextObject,SlackMessageBuilder.ISectionElement,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.TextSectionBlock" /> class.
+            </summary>
+            <param name="text">The text for the block, in the form of a text object. Maximum length for the text in this field is 3000 characters.</param>
+            <param name="accessory">One of the available element objects.</param>
+            <param name="blockId">A string acting as a unique identifier for a block. If not specified, a block_id will be generated. You can use this block_id when you receive an interaction payload to identify the source of the action. Maximum length for this field is 255 characters. block_id should be unique for each message and each iteration of a message. If a message is updated, use a new block_id.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.TextSectionBlock.Text">
+            <summary>
+            The text for the block, in the form of a text object. Maximum length for the text in this field is 3000 characters.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.TimePicker">
+             <summary>
+             An element which allows selection of a time of day.
+
+             On desktop clients, this time picker will take the form of a dropdown list with free-text entry for precise choices. On mobile clients, the time picker will use native time picker UIs.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#timepicker">https://api.slack.com/reference/block-kit/block-elements#timepicker</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.TimePicker.#ctor(System.String,SlackMessageBuilder.PlainText,System.Nullable{System.TimeSpan},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.TimePicker" /> class.
+            </summary>
+            <param name="actionId">An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the timepicker. Maximum length for the text in this field is 150 characters.</param>
+            <param name="initialTime">The initial time that is selected when the element is loaded. This should be in the format HH:mm, where HH is the 24-hour format of an hour (00 to 23) and mm is minutes with leading zeros (00 to 59), for example 22:25 for 10:25pm.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the checkboxes in this element.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.TimePicker.ActionId">
+            <summary>
+            An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.TimePicker.Placeholder">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the timepicker. Maximum length for the text in this field is 150 characters.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.TimePicker.InitialTime">
+            <summary>
+            The initial time that is selected when the element is loaded. This should be in the format HH:mm, where HH is the 24-hour format of an hour (00 to 23) and mm is minutes with leading zeros (00 to 59), for example 22:25 for 10:25pm.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.TimePicker.ConfirmDialog">
+            <summary>
+            A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after clicking one of the checkboxes in this element.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.TimePicker.FocusOnLoad">
+            <summary>
+            Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.TypedObject">
+            <summary>
+            The base of all typed objects.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.TypedObject.#ctor(System.String)">
+            <summary>
+            Initialises a new instance of the <see cref="T:SlackMessageBuilder.TypedObject" /> class.
+            </summary>
+            <param name="type">The type of element.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.TypedObject.Type">
+            <summary>
+            The type of element.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.UsersMultiSelect">
+             <summary>
+             This multi-select menu will populate its options with a list of Slack users visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#users_multi_select">https://api.slack.com/reference/block-kit/block-elements#users_multi_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.UsersMultiSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.UsersMultiSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialUsers">An array of user IDs of any valid users to be pre-selected when the menu loads.</param>
+            <param name="maxSelectedItems">Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.UsersMultiSelect.InitialUsers">
+            <summary>
+            An array of user IDs of any valid users to be pre-selected when the menu loads.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.UsersMultiSelect.MaxSelectedItems">
+            <summary>
+            Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.UsersSelect">
+             <summary>
+             This select menu will populate its options with a list of Slack users visible to the current user in the active workspace.
+
+             <a href="https://api.slack.com/reference/block-kit/block-elements#users_select">https://api.slack.com/reference/block-kit/block-elements#users_select</a>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.UsersSelect.#ctor(SlackMessageBuilder.PlainText,System.String,System.String,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.UsersSelect" /> class.
+            </summary>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="initialUser">The user ID of any valid user to be pre-selected when the menu loads.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.UsersSelect.InitialUser">
+            <summary>
+            The user ID of any valid user to be pre-selected when the menu loads.
+            </summary>
+        </member>
+        <member name="T:SlackMessageBuilder.UsersSelectBase">
+             <summary>
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.UsersSelectBase.#ctor(System.Boolean,SlackMessageBuilder.PlainText,System.String,SlackMessageBuilder.Confirm,System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.UsersSelectBase" /> class.
+            </summary>
+            <param name="isMultiSelect">Indicates whether the element will be a multi select.</param>
+            <param name="placeholder">A <see cref="T:SlackMessageBuilder.PlainText" /> object that defines the placeholder text shown on the menu. Maximum length for the text in this field is 150 characters.</param>
+            <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to <a href="https://api.slack.com/interactivity/handling#payloads">identify the source of the action</a>. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
+            <param name="confirmDialog">A <see cref="T:SlackMessageBuilder.Confirm" /> object that defines an optional confirmation dialog that appears after a menu item is selected.</param>
+            <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
+        </member>
+    </members>
+</doc>
