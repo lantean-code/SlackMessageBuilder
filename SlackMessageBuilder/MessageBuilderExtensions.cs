@@ -10,7 +10,7 @@ namespace SlackMessageBuilder
     public static class MessageBuilderExtensions
     {
         /// <summary>
-        /// Sets the thread id. Output: sets `thread_ts` property to the value.
+        /// Sets the thread id. This will replace any existing value.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="threadId"></param>
@@ -23,7 +23,20 @@ namespace SlackMessageBuilder
         }
 
         /// <summary>
-        /// Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'false'.
+        /// Sets the channel. This will replace any existing value.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="channel"></param>
+        /// <returns></returns>
+        public static MessageBuilder ForChannel(this MessageBuilder builder, string channel)
+        {
+            builder.SetChannel(channel);
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Sets the text of the message. This will replace any existing value.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="text"></param>
@@ -36,7 +49,7 @@ namespace SlackMessageBuilder
         }
 
         /// <summary>
-        /// Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'true' on the JSON.
+        /// Sets the text of the message. This will replace any existing value.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="markdownText"></param>
@@ -49,7 +62,7 @@ namespace SlackMessageBuilder
         }
 
         /// <summary>
-        /// Adds an attachement to the message using the <see cref="AttachmentBuilder"/>.
+        /// Adds an attachement to the message using the <see cref="AttachmentBuilder"/>. This method is cumulative and can be called multiple times.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="attachmentBuilderAction"></param>
@@ -63,7 +76,7 @@ namespace SlackMessageBuilder
         }
 
         /// <summary>
-        /// Adds an attachment to the message.
+        /// Adds an attachment to the message. This method is cumulative and can be called multiple times.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="slackAttachment"></param>
@@ -75,7 +88,7 @@ namespace SlackMessageBuilder
         }
 
         /// <summary>
-        /// Adds blocks to the message using the <see cref="BlocksBuilder"/>.
+        /// Adds blocks to the message using the <see cref="BlocksBuilder"/>. This method is cumulative and can be called multiple times.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="blocksBuilderAction"></param>
@@ -88,6 +101,12 @@ namespace SlackMessageBuilder
             return builder.WithBlocks(blocks);
         }
 
+        /// <summary>
+        /// Adds blocks to the message. This method is cumulative and can be called multiple times.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="blocks"></param>
+        /// <returns></returns>
         public static MessageBuilder WithBlocks(this MessageBuilder builder, IEnumerable<IBlockElement> blocks)
         {
             builder.AddBlocks(blocks);

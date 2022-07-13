@@ -5,7 +5,7 @@ namespace SlackMessageBuilder
     /// <summary>
     ///
     /// </summary>
-    public abstract class ExternalDataSelectBase : SelectMenu, ISectionElement, IInputElement
+    public abstract class ExternalDataSelectBase : SelectMenu
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExternalDataSelectBase"/> class.

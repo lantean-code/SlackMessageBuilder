@@ -14,10 +14,10 @@ namespace SlackMessageBuilder
         /// Initilizes a new instance of the <see cref="DatePicker"/> class.
         /// </summary>
         /// <param name="actionId">An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.</param>
-        /// <param name="placeholder"></param>
-        /// <param name="initialDate"></param>
-        /// <param name="confirmDialog"></param>
-        /// <param name="focusOnLoad"></param>
+        /// <param name="placeholder">A <see cref="PlainText"/> object that defines the placeholder text shown on the datepicker. Maximum length for the text in this field is 150 characters.</param>
+        /// <param name="initialDate">The initial date that is selected when the element is loaded. This should be in the format YYYY-MM-DD.</param>
+        /// <param name="confirmDialog">A <see cref="Confirm"/> object that defines an optional confirmation dialog that appears after a date is selected.</param>
+        /// <param name="focusOnLoad">Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.</param>
         public DatePicker(
             string actionId,
             PlainText? placeholder = null,

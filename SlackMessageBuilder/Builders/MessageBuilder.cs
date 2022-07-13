@@ -70,6 +70,11 @@ namespace SlackMessageBuilder.Builders
             _metadata = metadata;
         }
 
+        internal void SetLinknames(bool linkNames)
+        {
+            _linkNames = linkNames;
+        }
+
         internal void SetParse(string parse)
         {
             _parse = parse;

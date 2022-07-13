@@ -3,7 +3,7 @@
     /// <summary>
     ///
     /// </summary>
-    public abstract class PublicChannelsSelectBase : SelectMenu, ISectionElement, IInputElement, IActionsElement
+    public abstract class PublicChannelsSelectBase : SelectMenu
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublicChannelsSelectBase"/> class.

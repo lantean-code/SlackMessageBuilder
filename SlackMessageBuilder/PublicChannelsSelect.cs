@@ -7,7 +7,7 @@ namespace SlackMessageBuilder
     ///
     /// <a href="https://api.slack.com/reference/block-kit/block-elements#channel_select">https://api.slack.com/reference/block-kit/block-elements#channel_select</a>
     /// </summary>
-    public class PublicChannelsSelect : PublicChannelsSelectBase
+    public class PublicChannelsSelect : PublicChannelsSelectBase, IActionsElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublicChannelsSelect"/> class.

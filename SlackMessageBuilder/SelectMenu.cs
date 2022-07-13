@@ -5,7 +5,7 @@ namespace SlackMessageBuilder
     /// <summary>
     ///
     /// </summary>
-    public abstract class SelectMenu : TypedObject
+    public abstract class SelectMenu : TypedObject, ISectionElement, IInputElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectMenu"/> class.

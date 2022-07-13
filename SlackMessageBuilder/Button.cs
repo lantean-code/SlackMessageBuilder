@@ -44,7 +44,7 @@ namespace SlackMessageBuilder
         public PlainText Text { get; }
 
         /// <summary>
-        /// An identifier for the action triggered when the checkbox group is changed. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
+        /// An identifier for the action triggered when the button is clicked. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
         /// </summary>
         [JsonPropertyName("action_id")]
         public string ActionId { get; }

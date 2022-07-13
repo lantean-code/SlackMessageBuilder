@@ -3,7 +3,7 @@
     /// <summary>
     ///
     /// </summary>
-    public abstract class UsersSelectBase : SelectMenu, ISectionElement, IInputElement, IActionsElement
+    public abstract class UsersSelectBase : SelectMenu
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersSelectBase"/> class.

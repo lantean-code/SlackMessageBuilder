@@ -2,7 +2,7 @@
 
 namespace SlackMessageBuilder.Builders
 {
-    public class SlackContextBuilder : IElementsBuilder<IContextElement>
+    internal class ContextBuilder : IElementsBuilder<IContextElement>
     {
         private readonly List<IContextElement> _elements = new List<IContextElement>();
 

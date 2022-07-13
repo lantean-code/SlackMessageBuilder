@@ -1,7 +1,16 @@
 ﻿namespace SlackMessageBuilder
 {
-    public interface IOptionsGroupsBuilder
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IOptionsGroupsBuilder<in T>
     {
-        IOptionsGroupsBuilder AddOptionsGroup(OptionsGroup optionsGroup);
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="optionsGroup"></param>
+        /// <returns></returns>
+        IOptionsGroupsBuilder<T> AddOptionsGroup(OptionsGroup optionsGroup);
     }
 }

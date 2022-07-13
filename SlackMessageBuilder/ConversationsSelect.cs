@@ -7,7 +7,7 @@ namespace SlackMessageBuilder
     ///
     /// <a href="https://api.slack.com/reference/block-kit/block-elements#conversation_select">https://api.slack.com/reference/block-kit/block-elements#conversation_select</a>
     /// </summary>
-    public class ConversationsSelect : ConversationsSelectBase, IInputElement
+    public class ConversationsSelect : ConversationsSelectBase, IActionsElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConversationsSelect"/> class.

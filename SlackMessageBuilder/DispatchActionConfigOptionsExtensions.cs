@@ -2,8 +2,16 @@
 
 namespace SlackMessageBuilder
 {
+    /// <summary>
+    /// Dispatch action config option extensions.
+    /// </summary>
     public static class DispatchActionConfigOptionsExtensions
     {
+        /// <summary>
+        /// Creates a <see cref="DispatchActionConfig"/> from the <see cref="DispatchActionConfigOptions"/>.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static DispatchActionConfig ToDispatchActionConfig(this DispatchActionConfigOptions options)
         {
             var include = new List<string>(2);

@@ -5,7 +5,7 @@ namespace SlackMessageBuilder
     /// <summary>
     ///
     /// </summary>
-    public abstract class ConversationsSelectBase : SelectMenu, IActionsElement, ISectionElement, IInputElement
+    public abstract class ConversationsSelectBase : SelectMenu
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConversationsSelectBase"/> class.

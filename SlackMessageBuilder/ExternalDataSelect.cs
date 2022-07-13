@@ -7,7 +7,7 @@ namespace SlackMessageBuilder
     ///
     /// <a href="https://api.slack.com/reference/block-kit/block-elements#external_select">https://api.slack.com/reference/block-kit/block-elements#external_select</a>
     /// </summary>
-    public class ExternalDataSelect : ExternalDataSelectBase
+    public class ExternalDataSelect : ExternalDataSelectBase, IActionsElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExternalDataSelect"/> class.

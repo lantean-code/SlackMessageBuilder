@@ -2,8 +2,16 @@
 
 namespace SlackMessageBuilder
 {
+    /// <summary>
+    /// Conversation filter options extensions.
+    /// </summary>
     public static class ConversationFilterOptionsExtensions
     {
+        /// <summary>
+        /// Creates a <see cref="ConversationFilter"/> from the <see cref="ConversationFilterOptions"/>.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static ConversationFilter ToConversationFilter(this ConversationFilterOptions options)
         {
             var include = new List<string>(4);

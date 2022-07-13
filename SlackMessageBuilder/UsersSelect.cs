@@ -7,7 +7,7 @@ namespace SlackMessageBuilder
     ///
     /// <a href="https://api.slack.com/reference/block-kit/block-elements#users_select">https://api.slack.com/reference/block-kit/block-elements#users_select</a>
     /// </summary>
-    public class UsersSelect : UsersSelectBase
+    public class UsersSelect : UsersSelectBase, IActionsElement
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersSelect"/> class.
