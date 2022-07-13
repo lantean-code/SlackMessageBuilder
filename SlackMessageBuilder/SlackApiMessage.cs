@@ -6,7 +6,7 @@ namespace SlackMessageBuilder
     /// <summary>
     ///
     /// </summary>
-    public class SlackApiMessage : SlackMessage
+    public class SlackApiMessage : SlackMessageBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackApiMessage"/> class.
@@ -32,7 +32,7 @@ namespace SlackMessageBuilder
             string text,
             bool? isMarkdown = null,
             IEnumerable<IBlockElement>? blocks = null,
-            IEnumerable<Attachment>? attachments = null,
+            IEnumerable<AttachmentBase>? attachments = null,
             string? threadId = null,
             bool? asUser = null,
             string? iconEmoji = null,

@@ -81,9 +81,16 @@ namespace SlackMessageBuilder.Test
 
             Assert.NotNull(message);
 
-            var m = message.ToJson();
+            try
+            {
+                var m = message.ToJson();
 
-            Assert.NotNull(m);
+                Assert.NotNull(m);
+            }
+            catch (Exception ex)
+            {
+                var x = ex;
+            }
         }
     }
 }

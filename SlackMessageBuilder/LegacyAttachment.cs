@@ -6,7 +6,7 @@ namespace SlackMessageBuilder
 {
     /// <inheritdoc />
     [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-    public class LegacyAttachment : Attachment
+    public class LegacyAttachment : AttachmentBase
     {
         /// <summary>
         /// Creates a new instance of the <see cref="Attachment"/> class.

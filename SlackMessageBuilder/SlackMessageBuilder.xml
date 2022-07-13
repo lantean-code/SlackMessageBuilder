@@ -40,7 +40,18 @@
             An array of layout blocks in the same format as described in the building blocks guide.
             </summary>
         </member>
-        <member name="P:SlackMessageBuilder.Attachment.Color">
+        <member name="T:SlackMessageBuilder.AttachmentBase">
+            <summary>
+            <a href="https://api.slack.com/reference/messaging/attachments">https://api.slack.com/reference/messaging/attachments</a>
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.AttachmentBase.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.AttachmentBase"/> class.
+            </summary>
+            <param name="color">Changes the color of the border on the left side of this attachment from the default gray. Can either be one of good (green), warning (yellow), danger (red), or any hex color code (eg. #439FE0)</param>
+        </member>
+        <member name="P:SlackMessageBuilder.AttachmentBase.Color">
             <summary>
             Changes the color of the border on the left side of this attachment from the default gray. Can either be one of good (green), warning (yellow), danger (red), or any hex color code (eg. #439FE0)
             </summary>
@@ -2082,6 +2093,9 @@
             An element that can be added to a section block.
             </summary>
         </member>
+        <member name="T:SlackMessageBuilder.LegacyAttachment">
+            <inheritdoc />
+        </member>
         <member name="M:SlackMessageBuilder.LegacyAttachment.#ctor(System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{SlackMessageBuilder.Field},System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.String)">
             <summary>
             Creates a new instance of the <see cref="T:SlackMessageBuilder.Attachment"/> class.
@@ -2204,15 +2218,23 @@
         </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.AsReply(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
             <summary>
-            Sets the thread id. Output: sets `thread_ts` property to the value.
+            Sets the thread id. This will replace any existing value.
             </summary>
             <param name="builder"></param>
             <param name="threadId"></param>
             <returns></returns>
         </member>
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.ForChannel(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
+            <summary>
+            Sets the channel. This will replace any existing value.
+            </summary>
+            <param name="builder"></param>
+            <param name="channel"></param>
+            <returns></returns>
+        </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithText(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
             <summary>
-            Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'false'.
+            Sets the text of the message. This will replace any existing value.
             </summary>
             <param name="builder"></param>
             <param name="text"></param>
@@ -2220,7 +2242,7 @@
         </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithMarkdown(SlackMessageBuilder.Builders.MessageBuilder,System.String)">
             <summary>
-            Sets the text of the message. Output: sets `text` property to the value and `mrkdwn` to 'true' on the JSON.
+            Sets the text of the message. This will replace any existing value.
             </summary>
             <param name="builder"></param>
             <param name="markdownText"></param>
@@ -2228,23 +2250,23 @@
         </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithAttachment(SlackMessageBuilder.Builders.MessageBuilder,System.Action{SlackMessageBuilder.Builders.AttachmentBuilder})">
             <summary>
-            Adds an attachement to the message using the <see cref="T:SlackMessageBuilder.Builders.AttachmentBuilder"/>.
+            Adds an attachement to the message using the <see cref="T:SlackMessageBuilder.Builders.AttachmentBuilder"/>. This method is cumulative and can be called multiple times.
             </summary>
             <param name="builder"></param>
             <param name="attachmentBuilderAction"></param>
             <returns></returns>
         </member>
-        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithAttachment(SlackMessageBuilder.Builders.MessageBuilder,SlackMessageBuilder.Attachment)">
+        <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithAttachment(SlackMessageBuilder.Builders.MessageBuilder,SlackMessageBuilder.AttachmentBase)">
             <summary>
-            Adds an attachment to the message.
+            Adds an attachment to the message. This method is cumulative and can be called multiple times.
             </summary>
             <param name="builder"></param>
-            <param name="slackAttachment"></param>
+            <param name="attachment"></param>
             <returns></returns>
         </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithBlocks(SlackMessageBuilder.Builders.MessageBuilder,System.Action{SlackMessageBuilder.IBlocksBuilder})">
             <summary>
-            Adds blocks to the message using the <see cref="T:SlackMessageBuilder.BlocksBuilder"/>.
+            Adds blocks to the message using the <see cref="T:SlackMessageBuilder.BlocksBuilder"/>. This method is cumulative and can be called multiple times.
             </summary>
             <param name="builder"></param>
             <param name="blocksBuilderAction"></param>
@@ -2252,7 +2274,7 @@
         </member>
         <member name="M:SlackMessageBuilder.MessageBuilderExtensions.WithBlocks(SlackMessageBuilder.Builders.MessageBuilder,System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement})">
             <summary>
-            Adds blocks to the message.
+            Adds blocks to the message. This method is cumulative and can be called multiple times.
             </summary>
             <param name="builder"></param>
             <param name="blocks"></param>
@@ -2730,9 +2752,70 @@
             Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
             </summary>
         </member>
+        <member name="T:SlackMessageBuilder.SlackApiMessage">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackApiMessage.#ctor(System.String,System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement},System.Collections.Generic.IEnumerable{SlackMessageBuilder.AttachmentBase},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Nullable{System.Boolean},System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SlackApiMessage"/> class.
+            </summary>
+            <param name="channel">Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.</param>
+            <param name="text">The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.</param>
+            <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
+            <param name="blocks">An array of layout blocks in the same format as described in the building blocks guide.</param>
+            <param name="attachments">An array of legacy secondary attachments. We recommend you use blocks instead.</param>
+            <param name="threadId">The ID of another un-threaded message to reply to.</param>
+            <param name="asUser">Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.</param>
+            <param name="iconEmoji">Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.</param>
+            <param name="iconUrl">URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.</param>
+            <param name="linkNames">Find and link user groups. No longer supports linking individual users; use syntax shown in <a href="https://api.slack.com/reference/surfaces/formatting#mentioning-users">Mentioning Users</a> instead.</param>
+            <param name="metadata">JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.</param>
+            <param name="parse">Change how messages are treated. See <a href="https://api.slack.com/methods/chat.postMessage#formatting">https://api.slack.com/methods/chat.postMessage#formatting</a>.</param>
+            <param name="replyBroadcast">Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.</param>
+            <param name="unfurlLinks">Pass true to enable unfurling of primarily text-based content.</param>
+            <param name="unfurlMedia">Pass false to disable unfurling of media content.</param>
+            <param name="username">Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.</param>
+        </member>
         <member name="P:SlackMessageBuilder.SlackApiMessage.Channel">
             <summary>
             Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.AsUser">
+            <summary>
+            Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.IconEmoji">
+            <summary>
+            Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.IconUrl">
+            <summary>
+            URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.LinkNames">
+            <summary>
+            Find and link user groups. No longer supports linking individual users; use syntax shown in <a href="https://api.slack.com/reference/surfaces/formatting#mentioning-users">Mentioning Users</a> instead.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.Metadata">
+            <summary>
+            JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.Parse">
+            <summary>
+            Change how messages are treated. See <a href="https://api.slack.com/methods/chat.postMessage#formatting">https://api.slack.com/methods/chat.postMessage#formatting</a>.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.ReplyBroadcast">
+            <summary>
+            Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
             </summary>
         </member>
         <member name="P:SlackMessageBuilder.SlackApiMessage.UnfurlLinks">
@@ -2743,6 +2826,11 @@
         <member name="P:SlackMessageBuilder.SlackApiMessage.UnfurlMedia">
             <summary>
             Pass false to disable unfurling of media content.
+            </summary>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackApiMessage.Username">
+            <summary>
+            Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
             </summary>
         </member>
         <member name="T:SlackMessageBuilder.SlackJsonSerializerOptions">
@@ -2760,9 +2848,9 @@
             
              </summary>
         </member>
-        <member name="M:SlackMessageBuilder.SlackMessage.#ctor(System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement},System.Collections.Generic.IEnumerable{SlackMessageBuilder.Attachment},System.String)">
+        <member name="M:SlackMessageBuilder.SlackMessage.#ctor(System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement},System.Collections.Generic.IEnumerable{SlackMessageBuilder.AttachmentBase},System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SlackMessage"/> class.
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SlackMessageBase"/> class.
             </summary>
             <param name="text">The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.</param>
             <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
@@ -2770,27 +2858,42 @@
             <param name="attachments">An array of legacy secondary attachments. We recommend you use blocks instead.</param>
             <param name="threadId">The ID of another un-threaded message to reply to.</param>
         </member>
-        <member name="P:SlackMessageBuilder.SlackMessage.Text">
+        <member name="T:SlackMessageBuilder.SlackMessageBase">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackMessageBase.#ctor(System.String,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{SlackMessageBuilder.IBlockElement},System.Collections.Generic.IEnumerable{SlackMessageBuilder.AttachmentBase},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SlackMessageBuilder.SlackMessageBase"/> class.
+            </summary>
+            <param name="text">The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.</param>
+            <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
+            <param name="blocks">An array of layout blocks in the same format as described in the building blocks guide.</param>
+            <param name="attachments">An array of legacy secondary attachments. We recommend you use blocks instead.</param>
+            <param name="threadId">The ID of another un-threaded message to reply to.</param>
+        </member>
+        <member name="P:SlackMessageBuilder.SlackMessageBase.Text">
             <summary>
             The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.
             </summary>
         </member>
-        <member name="P:SlackMessageBuilder.SlackMessage.IsMarkdown">
+        <member name="P:SlackMessageBuilder.SlackMessageBase.IsMarkdown">
             <summary>
             Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.
             </summary>
         </member>
-        <member name="P:SlackMessageBuilder.SlackMessage.Blocks">
+        <member name="P:SlackMessageBuilder.SlackMessageBase.Blocks">
             <summary>
             An array of layout blocks in the same format as described in the building blocks guide.
             </summary>
         </member>
-        <member name="P:SlackMessageBuilder.SlackMessage.Attachments">
+        <member name="P:SlackMessageBuilder.SlackMessageBase.Attachments">
             <summary>
             An array of legacy secondary attachments. We recommend you use blocks instead.
             </summary>
         </member>
-        <member name="P:SlackMessageBuilder.SlackMessage.ThreadId">
+        <member name="P:SlackMessageBuilder.SlackMessageBase.ThreadId">
             <summary>
             The ID of another un-threaded message to reply to.
             </summary>
@@ -2800,11 +2903,41 @@
             Message builder factory.
             </summary>
         </member>
-        <member name="M:SlackMessageBuilder.SlackMessageBuilder.Create(System.String)">
+        <member name="M:SlackMessageBuilder.SlackMessageBuilder.Create(System.String,System.Nullable{System.Boolean})">
             <summary>
             Creates a new instance of the fluent message builder.
             </summary>
             <param name="text"></param>
+            <param name="isMarkdown"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SlackMessageBuilder.SlackMessageExtensions">
+            <summary>
+            SlackMessage extensions.
+            </summary>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackMessageExtensions.ToJson(SlackMessageBuilder.SlackMessageBase)">
+            <summary>
+            Converts the message into a JSON formatted for the Slack API.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackMessageExtensions.ToJson(SlackMessageBuilder.SlackMessageBase,System.IO.Stream)">
+            <summary>
+            Converts the message into a JSON formatted for the Slack API.
+            </summary>
+            <param name="message">The message to convert.</param>
+            <param name="utf8Json">The UTF-8 stream to write to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SlackMessageBuilder.SlackMessageExtensions.ToJsonAsync(SlackMessageBuilder.SlackMessageBase,System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Converts the message into a JSON formatted for the Slack API.
+            </summary>
+            <param name="message">The message to convert.</param>
+            <param name="utf8Json">The UTF-8 stream to write to.</param>
+            <param name="cancellationToken">A token that may be used to cancel the write operation.</param>
             <returns></returns>
         </member>
         <member name="T:SlackMessageBuilder.StaticMultiSelect">

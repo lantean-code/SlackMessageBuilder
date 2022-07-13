@@ -79,11 +79,11 @@ namespace SlackMessageBuilder
         /// Adds an attachment to the message. This method is cumulative and can be called multiple times.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="slackAttachment"></param>
+        /// <param name="attachment"></param>
         /// <returns></returns>
-        public static MessageBuilder WithAttachment(this MessageBuilder builder, Attachment slackAttachment)
+        public static MessageBuilder WithAttachment(this MessageBuilder builder, AttachmentBase attachment)
         {
-            builder.AddAttachment(slackAttachment);
+            builder.AddAttachment(attachment);
             return builder;
         }
 

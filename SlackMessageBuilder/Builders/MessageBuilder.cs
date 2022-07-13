@@ -8,7 +8,7 @@ namespace SlackMessageBuilder.Builders
     /// </summary>
     public class MessageBuilder
     {
-        private List<Attachment>? _attachments;
+        private List<AttachmentBase>? _attachments;
         private List<IBlockElement>? _blocks;
 
         private string _text;
@@ -100,9 +100,9 @@ namespace SlackMessageBuilder.Builders
             _username = username;
         }
 
-        internal void AddAttachment(Attachment attachment)
+        internal void AddAttachment(AttachmentBase attachment)
         {
-            _attachments ??= new List<Attachment>();
+            _attachments ??= new List<AttachmentBase>();
             _attachments.Add(attachment);
         }
 
@@ -123,9 +123,9 @@ namespace SlackMessageBuilder.Builders
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public SlackMessage Build()
+        public SlackMessageBase Build()
         {
-            SlackMessage slackMessage;
+            SlackMessageBase slackMessage;
             if (_isApiMessage)
             {
                 if (_channel is null)

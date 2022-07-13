@@ -122,7 +122,7 @@ namespace SlackMessageBuilder.Builders
             return this;
         }
 
-        internal Attachment Build()
+        internal AttachmentBase Build()
         {
             if (_blocks is not null)
             {

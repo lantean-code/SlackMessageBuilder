@@ -15,8 +15,8 @@ namespace SlackMessageBuilder.Converters
             typeof(IInputElement),
             typeof(ISectionElement),
             typeof(TextObject),
-            typeof(SlackMessage),
-            typeof(Attachment)
+            typeof(SlackMessageBase),
+            typeof(AttachmentBase)
         };
 
         public override bool CanConvert(Type typeToConvert)

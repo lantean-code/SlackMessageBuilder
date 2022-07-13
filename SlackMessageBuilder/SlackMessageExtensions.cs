@@ -15,7 +15,7 @@ namespace SlackMessageBuilder
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string ToJson(this SlackMessage message)
+        public static string ToJson(this SlackMessageBase message)
         {
             return JsonSerializer.Serialize(message, SlackJsonSerializerOptions.Options);
         }
@@ -26,7 +26,7 @@ namespace SlackMessageBuilder
         /// <param name="message">The message to convert.</param>
         /// <param name="utf8Json">The UTF-8 stream to write to.</param>
         /// <returns></returns>
-        public static void ToJson(this SlackMessage message, Stream utf8Json)
+        public static void ToJson(this SlackMessageBase message, Stream utf8Json)
         {
             JsonSerializer.Serialize(utf8Json, message, SlackJsonSerializerOptions.Options);
         }
@@ -38,7 +38,7 @@ namespace SlackMessageBuilder
         /// <param name="utf8Json">The UTF-8 stream to write to.</param>
         /// <param name="cancellationToken">A token that may be used to cancel the write operation.</param>
         /// <returns></returns>
-        public static Task ToJsonAsync(this SlackMessage message, Stream utf8Json, CancellationToken cancellationToken = default)
+        public static Task ToJsonAsync(this SlackMessageBase message, Stream utf8Json, CancellationToken cancellationToken = default)
         {
             return JsonSerializer.SerializeAsync(utf8Json, message, SlackJsonSerializerOptions.Options, cancellationToken);
         }
