@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -20,7 +19,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The text for the block. This field accepts any of the standard text formatting markup when type is mrkdwn. The maximum length is 3000 characters.
         /// </summary>
-        [JsonPropertyName("text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+#endif
         public string Text { get; }
     }
 }

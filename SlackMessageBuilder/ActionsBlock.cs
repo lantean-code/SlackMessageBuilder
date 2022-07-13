@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -25,7 +24,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An array of interactive element objects - buttons, select menus, overflow menus, or date pickers. There is a maximum of 25 elements in each action block.
         /// </summary>
-        [JsonPropertyName("elements")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("elements")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("elements")]
+#endif
         public IEnumerable<IActionsElement> Elements { get; }
     }
 }

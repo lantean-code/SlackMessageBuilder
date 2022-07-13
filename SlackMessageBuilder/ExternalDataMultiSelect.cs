@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -36,13 +35,21 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An array of <see cref="Option"/> objects that exactly match one or more of the options within options or option_groups. These options will be selected when the menu initially loads.
         /// </summary>
-        [JsonPropertyName("initial_options")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_options")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_options")]
+#endif
         public IEnumerable<Option>? InitialOptions { get; }
 
         /// <summary>
         /// Specifies the maximum number of items that can be selected in the menu. Minimum number is 1.
         /// </summary>
-        [JsonPropertyName("max_selected_items")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("max_selected_items")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("max_selected_items")]
+#endif
         public int? MaxSelectedItems { get; }
     }
 }

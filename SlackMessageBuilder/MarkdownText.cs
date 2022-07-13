@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -22,7 +21,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// When set to false (as is default) URLs will be auto-converted into links, conversation names will be link-ified, and certain mentions will be <a href="https://api.slack.com/reference/surfaces/formatting#automatic-parsing">automatically parsed</a>. Using a value of true will skip any preprocessing of this nature, although you can still include manual parsing strings.
         /// </summary>
-        [JsonPropertyName("verbatim")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("verbatim")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("verbatim")]
+#endif
         public bool? Verbatim { get; }
     }
 }

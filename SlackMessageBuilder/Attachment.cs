@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -23,7 +22,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An array of layout blocks in the same format as described in the building blocks guide.
         /// </summary>
-        [JsonPropertyName("blocks")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("blocks")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("blocks")]
+#endif
         public IEnumerable<IBlockElement>? Blocks { get; }
     }
 }

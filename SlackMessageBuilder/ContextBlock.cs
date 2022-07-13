@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -25,7 +24,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An array of image elements and text objects. Maximum number of items is 10.
         /// </summary>
-        [JsonPropertyName("elements")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("elements")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("elements")]
+#endif
         public IEnumerable<IContextElement> Elements { get; }
     }
 }

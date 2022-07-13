@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -23,19 +22,31 @@ namespace SlackMessageBuilder
         /// <summary>
         /// Shown as a bold heading displayed in the field object. It cannot contain markup and will be escaped for you.
         /// </summary>
-        [JsonPropertyName("name")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("name")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+#endif
         public string? Name { get; }
 
         /// <summary>
         /// The text value displayed in the field object. It can be formatted as plain text, or with mrkdwn by using the mrkdwn_in option above.
         /// </summary>
-        [JsonPropertyName("value")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("value")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
+#endif
         public string? Value { get; }
 
         /// <summary>
         /// Indicates whether the field object is short enough to be displayed side-by-side with other field objects. Defaults to false.
         /// </summary>
-        [JsonPropertyName("short")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("short")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("short")]
+#endif
         public bool? Short { get; }
     }
 }

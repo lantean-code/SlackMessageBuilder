@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -19,8 +18,12 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The type of element.
         /// </summary>
-        [JsonPropertyName("type")]
-        [JsonPropertyOrder(-1)]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("type", Order = -1)]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
+        [System.Text.Json.Serialization.JsonPropertyOrder(-1)]
+#endif
         public string Type { get; }
     }
 }

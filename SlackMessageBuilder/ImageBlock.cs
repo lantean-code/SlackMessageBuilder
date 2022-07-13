@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -26,19 +25,31 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The URL of the image to be displayed.
         /// </summary>
-        [JsonPropertyName("image_url")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("image_url")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("image_url")]
+#endif
         public string Url { get; }
 
         /// <summary>
         /// A plain-text summary of the image. This should not contain any markup. Maximum length for this field is 2000 characters.
         /// </summary>
-        [JsonPropertyName("alt_text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("alt_text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("alt_text")]
+#endif
         public string AlternativeText { get; }
 
         /// <summary>
         /// An optional title for the image in the form of a text object that can only be of type: plain_text. Maximum length for the text in this field is 2000 characters.
         /// </summary>
-        [JsonPropertyName("title")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("title")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("title")]
+#endif
         public PlainText? Title { get; }
     }
 }

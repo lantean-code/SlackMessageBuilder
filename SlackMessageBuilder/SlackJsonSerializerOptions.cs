@@ -1,4 +1,5 @@
-﻿using SlackMessageBuilder.Converters;
+﻿#if SYSTEMTEXTJSON || DEBUG
+using SlackMessageBuilder.Converters.SystemTextJson;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -24,3 +25,4 @@ namespace SlackMessageBuilder
         }
     }
 }
+#endif

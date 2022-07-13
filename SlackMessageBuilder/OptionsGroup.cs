@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -24,13 +23,21 @@ namespace SlackMessageBuilder
         /// <summary>
         /// A <see cref="PlainText"/> object that defines the label shown above this group of options. Maximum length for the text in this field is 75 characters.
         /// </summary>
-        [JsonPropertyName("label")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("label")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("label")]
+#endif
         public PlainText Label { get; }
 
         /// <summary>
         /// An array of <see cref="Option"/> objects that belong to this specific group. Maximum of 100 items.
         /// </summary>
-        [JsonPropertyName("options")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("options")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("options")]
+#endif
         public IEnumerable<Option> Options { get; }
     }
 }

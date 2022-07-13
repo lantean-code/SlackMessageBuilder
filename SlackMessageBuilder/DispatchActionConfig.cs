@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -25,7 +24,11 @@ namespace SlackMessageBuilder
         /// on_enter_pressed — payload is dispatched when user presses the enter key while the input is in focus.Hint text will appear underneath the input explaining to the user to press enter to submit.
         /// on_character_entered — payload is dispatched when a character is entered (or removed) in the input.
         /// </summary>
-        [JsonPropertyName("trigger_actions_on")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("trigger_actions_on")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("trigger_actions_on")]
+#endif
         public IEnumerable<string>? TriggerActionsOn { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -31,19 +30,31 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An identifier for the action triggered when a menu option is selected. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
         /// </summary>
-        [JsonPropertyName("action_id")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("action_id")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("action_id")]
+#endif
         public string ActionId { get; }
 
         /// <summary>
         /// An array of up to five option objects to display in the menu.
         /// </summary>
-        [JsonPropertyName("options")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("options")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("options")]
+#endif
         public IEnumerable<Option> Options { get; }
 
         /// <summary>
         /// A <see cref="Confirm"/> object that defines an optional confirmation dialog that appears after a menu item is selected.
         /// </summary>
-        [JsonPropertyName("confirm")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("confirm")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("confirm")]
+#endif
         public Confirm? ConfirmDialog { get; }
     }
 }

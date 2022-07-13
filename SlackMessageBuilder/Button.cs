@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -40,43 +39,71 @@ namespace SlackMessageBuilder
         /// <summary>
         /// A text object that defines the button's text. Can only be of type: plain_text. text may truncate with ~30 characters. Maximum length for the text in this field is 75 characters.
         /// </summary>
-        [JsonPropertyName("text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+#endif
         public PlainText Text { get; }
 
         /// <summary>
         /// An identifier for the action triggered when the button is clicked. You can use this when you receive an interaction payload to identify the source of the action. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
         /// </summary>
-        [JsonPropertyName("action_id")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("action_id")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("action_id")]
+#endif
         public string ActionId { get; }
 
         /// <summary>
         /// A URL to load in the user's browser when the button is clicked. Maximum length for this field is 3000 characters. If you're using url, you'll still receive an interaction payload and will need to send an acknowledgement response.
         /// </summary>
-        [JsonPropertyName("url")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("url")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("url")]
+#endif
         public string? Url { get; }
 
         /// <summary>
         /// The value to send along with the interaction payload. Maximum length for this field is 2000 characters.
         /// </summary>
-        [JsonPropertyName("value")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("value")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
+#endif
         public string? Value { get; }
 
         /// <summary>
         /// Decorates buttons with alternative visual color schemes. Use this option with restraint.
         /// </summary>
-        [JsonPropertyName("style")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("style")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("style")]
+#endif
         public ButtonStyle? Style { get; }
 
         /// <summary>
         /// A <see cref="Confirm"/> object that defines an optional confirmation dialog after the button is clicked.
         /// </summary>
-        [JsonPropertyName("confirm")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("confirm")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("confirm")]
+#endif
         public Confirm? ConfirmDialog { get; }
 
         /// <summary>
         /// A label for longer descriptive text about a button element. This label will be read out by screen readers instead of the button text object. Maximum length for this field is 75 characters.
         /// </summary>
-        [JsonPropertyName("accessibility_label")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("accessibility_label")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("accessibility_label")]
+#endif
         public string? AccessibilityLabel { get; }
     }
 }

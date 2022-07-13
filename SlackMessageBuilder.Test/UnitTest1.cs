@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace SlackMessageBuilder.Test
 {
     public class UnitTest1

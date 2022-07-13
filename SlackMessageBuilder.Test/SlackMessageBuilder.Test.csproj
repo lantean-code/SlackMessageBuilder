@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

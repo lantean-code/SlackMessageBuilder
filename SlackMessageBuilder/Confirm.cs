@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -34,31 +33,51 @@ namespace SlackMessageBuilder
         /// <summary>
         /// A <see cref="PlainText"/> object that defines the dialog's title. Maximum length for this field is 100 characters.
         /// </summary>
-        [JsonPropertyName("title")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("title")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("title")]
+#endif
         public PlainText Title { get; }
 
         /// <summary>
         /// A <see cref="global::SlackMessageBuilder.TextObject"/> object that defines the explanatory text that appears in the confirm dialog. Maximum length for the text in this field is 300 characters.
         /// </summary>
-        [JsonPropertyName("text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+#endif
         public TextObject Text { get; }
 
         /// <summary>
         /// A <see cref="PlainText"/> object object to define the text of the button that confirms the action. Maximum length for the text in this field is 30 characters.
         /// </summary>
-        [JsonPropertyName("confirm")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("confirm")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("confirm")]
+#endif
         public PlainText ConfirmButtonText { get; }
 
         /// <summary>
         /// A <see cref="PlainText"/> object to define the text of the button that cancels the action. Maximum length for the text in this field is 30 characters.
         /// </summary>
-        [JsonPropertyName("deny")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("deny")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("deny")]
+#endif
         public PlainText DenyButtonText { get; }
 
         /// <summary>
         /// Defines the color scheme applied to the confirm button. A value of danger will display the button with a red background on desktop, or red text on mobile. A value of primary will display the button with a green background on desktop, or blue text on mobile. If this field is not provided, the default value will be primary.
         /// </summary>
-        [JsonPropertyName("style")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("style")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("style")]
+#endif
         public ButtonStyle? Style { get; }
     }
 }

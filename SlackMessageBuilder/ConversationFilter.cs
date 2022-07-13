@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -33,19 +32,31 @@ namespace SlackMessageBuilder
         /// <summary>
         /// Indicates which type of conversations should be included in the list. When this field is provided, any conversations that do not match will be excluded. You should provide an array of strings from the following options: im, mpim, private, and public. The array cannot be empty.
         /// </summary>
-        [JsonPropertyName("include")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("include")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("include")]
+#endif
         public IEnumerable<string>? Include { get; }
 
         /// <summary>
         /// Indicates whether to exclude external <a href="https://api.slack.com/enterprise/shared-channels">shared channels</a> from conversation lists. Defaults to false.
         /// </summary>
-        [JsonPropertyName("exclude_external_shared_channels")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("exclude_external_shared_channels")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("exclude_external_shared_channels")]
+#endif
         public bool? ExcludeExternalSharedChannels { get; }
 
         /// <summary>
         /// Indicates whether to exclude bot users from conversation lists. Defaults to false.
         /// </summary>
-        [JsonPropertyName("exclude_bot_users")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("exclude_bot_users")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("exclude_bot_users")]
+#endif
         public bool? ExcludeBotUsers { get; }
     }
 }

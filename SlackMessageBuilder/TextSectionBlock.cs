@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -26,7 +25,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The text for the block, in the form of a text object. Maximum length for the text in this field is 3000 characters.
         /// </summary>
-        [JsonPropertyName("text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+#endif
         public TextObject Text { get; }
     }
 }

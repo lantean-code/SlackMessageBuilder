@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -44,13 +43,21 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An array of <see cref="Option"/> objects. Maximum number of options is 100. If option_groups is specified, this field should not be.
         /// </summary>
-        [JsonPropertyName("options")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("options")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("options")]
+#endif
         public IEnumerable<Option>? Options { get; }
 
         /// <summary>
         /// An array of <see cref="OptionsGroup"/> objects. Maximum number of option groups is 100. If options is specified, this field should not be.
         /// </summary>
-        [JsonPropertyName("option_groups")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("option_groups")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("option_groups")]
+#endif
         public IEnumerable<OptionsGroup>? OptionGroups { get; }
     }
 }

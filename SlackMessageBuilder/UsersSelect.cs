@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -30,7 +29,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The user ID of any valid user to be pre-selected when the menu loads.
         /// </summary>
-        [JsonPropertyName("initial_user")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_user")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_user")]
+#endif
         public string? InitialUser { get; }
     }
 }

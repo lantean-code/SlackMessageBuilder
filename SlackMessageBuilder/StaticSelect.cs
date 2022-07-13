@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -35,7 +34,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// A single option that exactly matches one of the options within options or option_groups. This option will be selected when the menu initially loads.
         /// </summary>
-        [JsonPropertyName("initial_option")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_option")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_option")]
+#endif
         public Option? InitalOption { get; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -22,7 +21,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// One of the available element objects.
         /// </summary>
-        [JsonPropertyName("accessory")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("accessory")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("accessory")]
+#endif
         public ISectionElement? Accessory { get; }
     }
 }

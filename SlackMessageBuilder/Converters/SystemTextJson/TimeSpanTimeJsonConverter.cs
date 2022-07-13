@@ -1,9 +1,10 @@
-﻿using System;
+﻿#if SYSTEMTEXTJSON || DEBUG
+using System;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder.Converters
+namespace SlackMessageBuilder.Converters.SystemTextJson
 {
     internal class TimeSpanTimeJsonConverter : JsonConverter<TimeSpan>
     {
@@ -20,3 +21,4 @@ namespace SlackMessageBuilder.Converters
         }
     }
 }
+#endif

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -61,67 +60,111 @@ namespace SlackMessageBuilder
         /// <summary>
         /// Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
         /// </summary>
-        [JsonPropertyName("channel")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("channel")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("channel")]
+#endif
         public string Channel { get; }
 
         /// <summary>
         /// Set to true to post the message as the authed user, instead of as a bot. Defaults to false. Cannot be used by new Slack apps. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
         /// </summary>
-        [JsonPropertyName("as_user")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("as_user")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("as_user")]
+#endif
         public bool? AsUser { get; }
 
         /// <summary>
         /// Emoji to use as the icon for this message. Overrides icon_url. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
         /// </summary>
-        [JsonPropertyName("icon_emoji")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("icon_emoji")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("icon_emoji")]
+#endif
         public string? IconEmoji { get; }
 
         /// <summary>
         /// URL to an image to use as the icon for this message. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
         /// </summary>
-        [JsonPropertyName("icon_url")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("icon_url")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("icon_url")]
+#endif
         public string? IconUrl { get; }
 
         /// <summary>
         /// Find and link user groups. No longer supports linking individual users; use syntax shown in <a href="https://api.slack.com/reference/surfaces/formatting#mentioning-users">Mentioning Users</a> instead.
         /// </summary>
-        [JsonPropertyName("link_names")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("link_names")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("link_names")]
+#endif
         public bool? LinkNames { get; }
 
         /// <summary>
         /// JSON object with event_type and event_payload fields, presented as a URL-encoded string. Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
         /// </summary>
-        [JsonPropertyName("metadata")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("metadata")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("metadata")]
+#endif
         public string? Metadata { get; }
 
         /// <summary>
         /// Change how messages are treated. See <a href="https://api.slack.com/methods/chat.postMessage#formatting">https://api.slack.com/methods/chat.postMessage#formatting</a>.
         /// </summary>
-        [JsonPropertyName("parse")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("parse")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("parse")]
+#endif
         public string? Parse { get; }
 
         /// <summary>
         /// Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.
         /// </summary>
-        [JsonPropertyName("reply_broadcast")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("reply_broadcast")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("reply_broadcast")]
+#endif
         public bool? ReplyBroadcast { get; }
 
         /// <summary>
         /// Pass true to enable unfurling of primarily text-based content.
         /// </summary>
-        [JsonPropertyName("unfurl_links")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("unfurl_links")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("unfurl_links")]
+#endif
         public bool? UnfurlLinks { get; internal set; }
 
         /// <summary>
         /// Pass false to disable unfurling of media content.
         /// </summary>
-        [JsonPropertyName("unfurl_media")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("unfurl_media")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("unfurl_media")]
+#endif
         public bool? UnfurlMedia { get; internal set; }
 
         /// <summary>
         /// Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
         /// </summary>
-        [JsonPropertyName("username")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("username")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("username")]
+#endif
         public string? Username { get; }
     }
 }

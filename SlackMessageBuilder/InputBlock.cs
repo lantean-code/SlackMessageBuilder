@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -36,31 +35,51 @@ namespace SlackMessageBuilder
         /// <summary>
         /// A label that appears above an input element in the form of a text object that must have type of plain_text. Maximum length for the text in this field is 2000 characters.
         /// </summary>
-        [JsonPropertyName("label")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("label")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("label")]
+#endif
         public PlainText Label { get; }
 
         /// <summary>
         /// A <see cref="PlainTextInput"/> element, a <see cref="Checkboxes"/> element, a <see cref="RadioButtons"/> element, a <see cref="SelectMenu"/> element, a <see cref="DatePicker"/> or a <see cref="TimePicker"/>.
         /// </summary>
-        [JsonPropertyName("element")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("element")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("element")]
+#endif
         public IInputElement Element { get; }
 
         /// <summary>
         /// A boolean that indicates whether or not the use of elements in this block should dispatch a block_actions payload. Defaults to false.
         /// </summary>
-        [JsonPropertyName("dispatch_action")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("dispatch_action")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("dispatch_action")]
+#endif
         public bool? DispatchAction { get; }
 
         /// <summary>
         /// An optional hint that appears below an input element in a lighter grey. It must be a text object with a type of plain_text. Maximum length for the text in this field is 2000 characters.
         /// </summary>
-        [JsonPropertyName("hint")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("hint")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("hint")]
+#endif
         public PlainText? Hint { get; }
 
         /// <summary>
         /// A boolean that indicates whether the input element may be empty when a user submits the modal. Defaults to false.
         /// </summary>
-        [JsonPropertyName("optional")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("optional")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("optional")]
+#endif
         public bool? Optional { get; }
     }
 }

@@ -5,19 +5,31 @@
 	<LangVersion>9.0</LangVersion>
 	<Nullable>enable</Nullable>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 	<DocumentationFile>./SlackMessageBuilder.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'">
     <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName).NewtonsoftJson</AssemblyName>
+	<DocumentationFile>./SlackMessageBuilder.NewtonsoftJson.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'">
     <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName).SystemTextJson</AssemblyName>
+	<DocumentationFile>./SlackMessageBuilder.SystemTextJson.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'" />
+	<PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'" />
   </ItemGroup>
-
 </Project>

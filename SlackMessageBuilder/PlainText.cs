@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -22,7 +21,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// Indicates whether emojis in a text field should be escaped into the colon emoji format.
         /// </summary>
-        [JsonPropertyName("emoji")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("emoji")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("emoji")]
+#endif
         public bool? Emoji { get; }
     }
 }

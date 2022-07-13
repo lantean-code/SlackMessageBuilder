@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -43,49 +42,81 @@ namespace SlackMessageBuilder
         /// <summary>
         /// An identifier for the input value when the parent modal is submitted. You can use this when you receive a view_submission payload to identify the value of the input element. Should be unique among all other action_ids in the containing block. Maximum length for this field is 255 characters.
         /// </summary>
-        [JsonPropertyName("action_id")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("action_id")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("action_id")]
+#endif
         public string ActionId { get; }
 
         /// <summary>
         /// A <see cref="PlainText"/> object that defines the placeholder text shown in the plain-text input. Maximum length for the text in this field is 150 characters.
         /// </summary>
-        [JsonPropertyName("placeholder")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("placeholder")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("placeholder")]
+#endif
         public PlainText? Placeholder { get; }
 
         /// <summary>
         /// The initial value in the plain-text input when it is loaded.
         /// </summary>
-        [JsonPropertyName("initial_value")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_value")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_value")]
+#endif
         public string? InitialValue { get; }
 
         /// <summary>
         /// Indicates whether the input will be a single line (false) or a larger textarea (true). Defaults to false.
         /// </summary>
-        [JsonPropertyName("multiline")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("multiline")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("multiline")]
+#endif
         public bool? Multiline { get; }
 
         /// <summary>
         /// The minimum length of input that the user must provide. If the user provides less, they will receive an error. Maximum value is 3000.
         /// </summary>
-        [JsonPropertyName("min_length")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("min_length")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("min_length")]
+#endif
         public int? MinLength { get; }
 
         /// <summary>
         /// The maximum length of input that the user can provide. If the user provides more, they will receive an error.
         /// </summary>
-        [JsonPropertyName("max_length")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("max_length")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("max_length")]
+#endif
         public int? MaxLength { get; }
 
         /// <summary>
         /// A dispatch configuration object that determines when during text input the element returns a block_actions payload.
         /// </summary>
-        [JsonPropertyName("dispatch_action_config")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("dispatch_action_config")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("dispatch_action_config")]
+#endif
         public DispatchActionConfig? DispatchActionConfig { get; }
 
         /// <summary>
         /// Indicates whether the element will be set to auto focus within the view object. Only one element can be set to true. Defaults to false.
         /// </summary>
-        [JsonPropertyName("focus_on_load")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("focus_on_load")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("focus_on_load")]
+#endif
         public bool? FocusOnLoad { get; }
     }
 }

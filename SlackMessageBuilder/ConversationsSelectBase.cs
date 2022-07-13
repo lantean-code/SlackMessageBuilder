@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -36,7 +35,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// Pre-populates the select menu with the conversation that the user was viewing when they opened the modal, if available. Default is false.
         /// </summary>
-        [JsonPropertyName("default_to_current_conversation")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("default_to_current_conversation")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("default_to_current_conversation")]
+#endif
         public bool DefaultToCurrentConversation { get; }
 
         /// <summary>
@@ -45,13 +48,21 @@ namespace SlackMessageBuilder
         /// <remarks>
         /// This field only works with menus in input blocks in modals.
         /// </remarks>
-        [JsonPropertyName("response_url_enabled")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("response_url_enabled")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("response_url_enabled")]
+#endif
         public bool ResponseUrlEnabled { get; }
 
         /// <summary>
         /// A <see cref="ConversationFilter"/> object that reduces the list of available conversations using the specified criteria.
         /// </summary>
-        [JsonPropertyName("filter")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("filter")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("filter")]
+#endif
         public ConversationFilter? Filter { get; }
     }
 }

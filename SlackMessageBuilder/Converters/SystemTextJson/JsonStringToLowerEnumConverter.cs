@@ -1,15 +1,12 @@
-﻿using System;
+﻿#if SYSTEMTEXTJSON || DEBUG
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder.Converters
+namespace SlackMessageBuilder.Converters.SystemTextJson
 {
-    /// <summary>
-    ///
-    /// </summary>
-    public class JsonStringToLowerEnumConverter : JsonConverterFactory
+    internal class JsonStringToLowerEnumConverter : JsonConverterFactory
     {
-        /// <inheritdoc/>
         public override bool CanConvert(Type typeToConvert)
         {
             return typeToConvert.IsEnum;
@@ -17,7 +14,6 @@ namespace SlackMessageBuilder.Converters
 
         private static readonly Type _converterType = typeof(Converter<>);
 
-        /// <inheritdoc/>
         public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
         {
             Type type = _converterType.MakeGenericType(typeToConvert);
@@ -44,3 +40,4 @@ namespace SlackMessageBuilder.Converters
         }
     }
 }
+#endif

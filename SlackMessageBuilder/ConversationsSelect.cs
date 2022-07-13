@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -36,7 +35,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The ID of any valid conversation to be pre-selected when the menu loads. If default_to_current_conversation is also supplied, initial_conversation will take precedence.
         /// </summary>
-        [JsonPropertyName("initial_conversation")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_conversation")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_conversation")]
+#endif
         public string? InitialConversation { get; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace SlackMessageBuilder
 {
     /// <summary>
@@ -33,7 +32,11 @@ namespace SlackMessageBuilder
         /// <summary>
         /// The ID of any valid public channel to be pre-selected when the menu loads.
         /// </summary>
-        [JsonPropertyName("initial_channel")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("initial_channel")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("initial_channel")]
+#endif
         public string? InitialChannel { get; }
 
         /// <summary>
@@ -42,7 +45,11 @@ namespace SlackMessageBuilder
         /// <remarks>
         /// This field only works with menus in input blocks in modals.
         /// </remarks>
-        [JsonPropertyName("response_url_enabled")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("response_url_enabled")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("response_url_enabled")]
+#endif
         public bool? ResponseUrlEnabled { get; }
     }
 }

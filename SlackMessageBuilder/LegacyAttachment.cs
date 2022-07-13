@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SlackMessageBuilder
 {
@@ -67,105 +66,165 @@ namespace SlackMessageBuilder
         /// A valid URL that displays a small 16px by 16px image to the left of the author_name text. Will only work if author_name is present.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("author_icon")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("author_icon")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("author_icon")]
+#endif
         public string? AuthorIcon { get; }
 
         /// <summary>
         /// A valid URL that will hyperlink the author_name text. Will only work if author_name is present.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("author_icon")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("author_icon")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("author_icon")]
+#endif
         public string? AuthorLink { get; }
 
         /// <summary>
         /// Small text used to display the author's name.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("author_name")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("author_name")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("author_name")]
+#endif
         public string? AuthorName { get; }
 
         /// <summary>
         /// A plain text summary of the attachment used in clients that don't show formatted text (eg. IRC, mobile notifications).
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("fallback")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("fallback")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("fallback")]
+#endif
         public string? Fallback { get; }
 
         /// <summary>
         /// An array of field objects that get displayed in a table-like way (See the example above). For best results, include no more than 2-3 field objects.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("fields")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("fields")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("fields")]
+#endif
         public IEnumerable<Field>? Fields { get; }
 
         /// <summary>
         /// Some brief text to help contextualize and identify an attachment. Limited to 300 characters, and may be truncated further when displayed to users in environments with limited screen real estate.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("footer")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("footer")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("footer")]
+#endif
         public string? Footer { get; }
 
         /// <summary>
         /// A valid URL to an image file that will be displayed beside the footer text. Will only work if author_name is present. We'll render what you provide at 16px by 16px. It's best to use an image that is similarly sized.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("footer_icon")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("footer_icon")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("footer_icon")]
+#endif
         public string? FooterIcon { get; }
 
         /// <summary>
         /// A valid URL to an image file that will be displayed at the bottom of the attachment. We support GIF, JPEG, PNG, and BMP formats.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("image_url")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("image_url")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("image_url")]
+#endif
         public string? ImageUrl { get; }
 
         /// <summary>
         /// An array of field names that should be formatted by mrkdwn syntax.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("mrkdwn_in")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("mrkdwn_in")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("mrkdwn_in")]
+#endif
         public IEnumerable<string>? MarkdownIn { get; }
 
         /// <summary>
         /// Text that appears above the message attachment block. It can be formatted as plain text, or with mrkdwn by including it in the mrkdwn_in field.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("pretext")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("pretext")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("pretext")]
+#endif
         public string? Pretext { get; }
 
         /// <summary>
         /// The main body text of the attachment. It can be formatted as plain text, or with mrkdwn by including it in the mrkdwn_in field. The content will automatically collapse if it contains 700+ characters or 5+ line breaks, and will display a "Show more..." link to expand the content.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("text")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("text")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("text")]
+#endif
         public string? Text { get; }
 
         /// <summary>
         /// A valid URL to an image file that will be displayed as a thumbnail on the right side of a message attachment. We currently support the following formats: GIF, JPEG, PNG, and BMP.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("thumb_url")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("thumb_url")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("thumb_url")]
+#endif
         public string? ThumbnailUrl { get; }
 
         /// <summary>
         /// Large title text near the top of the attachment.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("title")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("title")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("title")]
+#endif
         public string? Title { get; }
 
         /// <summary>
         /// A valid URL that turns the title text into a hyperlink.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("title_link")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("title_link")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("title_link")]
+#endif
         public string? TitleLink { get; }
 
         /// <summary>
         /// An integer Unix timestamp that is used to related your attachment to a specific time. The attachment will display the additional timestamp value as part of the attachment's footer.
         /// </summary>
         [Obsolete("This is a legacy field. Legacy options may be subject to reductions in visibility or functionality.")]
-        [JsonPropertyName("ts")]
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("ts")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("ts")]
+#endif
         public int? Timestamp { get; }
     }
 }

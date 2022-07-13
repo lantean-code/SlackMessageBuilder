@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>SlackMessageBuilder.SystemTextJson</name>
+        <name>SlackMessageBuilder.NewtonsoftJson</name>
     </assembly>
     <members>
         <member name="T:SlackMessageBuilder.ActionsBlock">
@@ -2822,16 +2822,6 @@
             Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
             </summary>
         </member>
-        <member name="T:SlackMessageBuilder.SlackJsonSerializerOptions">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:SlackMessageBuilder.SlackJsonSerializerOptions.Options">
-             <summary>
-            
-             </summary>
-        </member>
         <member name="T:SlackMessageBuilder.SlackMessage">
              <summary>
             
@@ -2918,15 +2908,6 @@
             </summary>
             <param name="message">The message to convert.</param>
             <param name="utf8Json">The UTF-8 stream to write to.</param>
-            <returns></returns>
-        </member>
-        <member name="M:SlackMessageBuilder.SlackMessageExtensions.ToJsonAsync(SlackMessageBuilder.SlackMessageBase,System.IO.Stream,System.Threading.CancellationToken)">
-            <summary>
-            Converts the message into a JSON formatted for the Slack API.
-            </summary>
-            <param name="message">The message to convert.</param>
-            <param name="utf8Json">The UTF-8 stream to write to.</param>
-            <param name="cancellationToken">A token that may be used to cancel the write operation.</param>
             <returns></returns>
         </member>
         <member name="T:SlackMessageBuilder.StaticMultiSelect">
