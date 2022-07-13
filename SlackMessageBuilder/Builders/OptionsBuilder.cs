@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Slack.MessageBuilder.Objects;
+using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Builders
+namespace Slack.MessageBuilder.Builders
 {
     internal class OptionsBuilder<T> : IOptionsBuilder<T>
     {

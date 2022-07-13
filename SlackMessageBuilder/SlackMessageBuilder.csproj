@@ -6,25 +6,41 @@
 	<Nullable>enable</Nullable>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
+	<Version>0.1.0-beta</Version>
+	<Authors>ahjephson</Authors>
+	<Company>ahjephson</Company>
+	<RepositoryUrl>https://github.com/ahjephson/SlackMessageBuilder.git</RepositoryUrl>
+	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	<PackageProjectUrl>https://github.com/ahjephson/SlackMessageBuilder</PackageProjectUrl>
+	<Description>Fluent message builder for Slack messages.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
     <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
 	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 	<DocumentationFile>./SlackMessageBuilder.xml</DocumentationFile>
+	<RootNamespace>$(MSBuildProjectName.Replace("Slack", "Slack."))</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'">
     <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
 	<AssemblyName>$(MSBuildProjectName).NewtonsoftJson</AssemblyName>
 	<DocumentationFile>./SlackMessageBuilder.NewtonsoftJson.xml</DocumentationFile>
+	<PackageId>SlackMessageBuilder.NewtonsoftJson</PackageId>
+	<PackageTags>Slack API;Slack;Slack Message Builder;Newtonsoft.Json</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'">
     <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
 	<AssemblyName>$(MSBuildProjectName).SystemTextJson</AssemblyName>
 	<DocumentationFile>./SlackMessageBuilder.SystemTextJson.xml</DocumentationFile>
+	<PackageId>SlackMessageBuilder.SystemTextJson</PackageId>
+	<PackageTags>Slack API;Slack;Slack Message Builder;System.Text.Json</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+	<None Include="..\LICENSE.md" Link="LICENSE.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
 	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />

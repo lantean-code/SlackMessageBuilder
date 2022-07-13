@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder.Converters.SystemTextJson
+namespace Slack.MessageBuilder.Converters.SystemTextJson
 {
     internal class TimeSpanTimeJsonConverter : JsonConverter<TimeSpan>
     {

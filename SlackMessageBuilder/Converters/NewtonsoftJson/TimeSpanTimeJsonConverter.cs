@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Globalization;
 
-namespace SlackMessageBuilder.Converters.NewtonsoftJson
+namespace Slack.MessageBuilder.Converters.NewtonsoftJson
 {
     internal class TimeSpanTimeJsonConverter : JsonConverter<TimeSpan>
     {

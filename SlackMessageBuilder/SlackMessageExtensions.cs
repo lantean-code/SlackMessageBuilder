@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using Slack.MessageBuilder.Objects;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     /// <summary>
     /// SlackMessage extensions.

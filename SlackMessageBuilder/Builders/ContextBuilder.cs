@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Builders
+namespace Slack.MessageBuilder.Builders
 {
     internal class ContextBuilder : IElementsBuilder<IContextElement>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     internal class BlocksBuilder : IBlocksBuilder
     {

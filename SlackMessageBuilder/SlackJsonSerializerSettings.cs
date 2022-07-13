@@ -1,15 +1,17 @@
 ﻿#if NEWTONSOFTJSON || DEBUG
 using Newtonsoft.Json;
-using SlackMessageBuilder.Converters.NewtonsoftJson;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+using Slack.MessageBuilder.Converters.NewtonsoftJson;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class SlackJsonSerializerSettings
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static JsonSerializerSettings Settings { get; } = new JsonSerializerSettings();
 
         static SlackJsonSerializerSettings()

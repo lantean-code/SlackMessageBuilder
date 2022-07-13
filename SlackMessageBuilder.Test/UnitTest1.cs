@@ -1,4 +1,7 @@
-namespace SlackMessageBuilder.Test
+using Slack.MessageBuilder;
+using Slack.MessageBuilder.Objects;
+
+namespace Slack.MessageBuilder.Test
 {
     public class UnitTest1
     {

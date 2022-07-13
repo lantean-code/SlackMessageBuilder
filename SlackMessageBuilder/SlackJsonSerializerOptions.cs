@@ -1,9 +1,9 @@
 ﻿#if SYSTEMTEXTJSON || DEBUG
-using SlackMessageBuilder.Converters.SystemTextJson;
+using Slack.MessageBuilder.Converters.SystemTextJson;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     /// <summary>
     ///

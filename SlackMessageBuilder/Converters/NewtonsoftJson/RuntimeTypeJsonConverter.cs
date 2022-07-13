@@ -1,9 +1,10 @@
 ﻿#if NEWTONSOFTJSON || DEBUG
 using Newtonsoft.Json;
+using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Converters.NewtonsoftJson
+namespace Slack.MessageBuilder.Converters.NewtonsoftJson
 {
     internal class RuntimeTypeJsonConverter : JsonConverter
     {

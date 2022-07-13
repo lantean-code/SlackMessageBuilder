@@ -1,8 +1,8 @@
-﻿using SlackMessageBuilder.Builders;
+﻿using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     /// <summary>
     /// Fluent builder for <see cref="SlackMessage"/>s.
@@ -15,7 +15,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="threadId"></param>
         /// <returns></returns>
-        public static MessageBuilder AsReply(this MessageBuilder builder, string threadId)
+        public static SlackMessageBuilder AsReply(this SlackMessageBuilder builder, string threadId)
         {
             builder.SetThread(threadId);
 
@@ -28,7 +28,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="channel"></param>
         /// <returns></returns>
-        public static MessageBuilder ForChannel(this MessageBuilder builder, string channel)
+        public static SlackMessageBuilder ForChannel(this SlackMessageBuilder builder, string channel)
         {
             builder.SetChannel(channel);
 
@@ -41,7 +41,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MessageBuilder WithText(this MessageBuilder builder, string text)
+        public static SlackMessageBuilder WithText(this SlackMessageBuilder builder, string text)
         {
             builder.SetText(text, false);
 
@@ -54,7 +54,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="markdownText"></param>
         /// <returns></returns>
-        public static MessageBuilder WithMarkdown(this MessageBuilder builder, string markdownText)
+        public static SlackMessageBuilder WithMarkdown(this SlackMessageBuilder builder, string markdownText)
         {
             builder.SetText(markdownText, true);
 
@@ -67,7 +67,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="attachmentBuilderAction"></param>
         /// <returns></returns>
-        public static MessageBuilder WithAttachment(this MessageBuilder builder, Action<AttachmentBuilder> attachmentBuilderAction)
+        public static SlackMessageBuilder WithAttachment(this SlackMessageBuilder builder, Action<AttachmentBuilder> attachmentBuilderAction)
         {
             var attachmentBuilder = new AttachmentBuilder();
             attachmentBuilderAction(attachmentBuilder);
@@ -81,7 +81,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="attachment"></param>
         /// <returns></returns>
-        public static MessageBuilder WithAttachment(this MessageBuilder builder, AttachmentBase attachment)
+        public static SlackMessageBuilder WithAttachment(this SlackMessageBuilder builder, AttachmentBase attachment)
         {
             builder.AddAttachment(attachment);
             return builder;
@@ -93,7 +93,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="blocksBuilderAction"></param>
         /// <returns></returns>
-        public static MessageBuilder WithBlocks(this MessageBuilder builder, Action<IBlocksBuilder> blocksBuilderAction)
+        public static SlackMessageBuilder WithBlocks(this SlackMessageBuilder builder, Action<IBlocksBuilder> blocksBuilderAction)
         {
             var blocksBuilder = new BlocksBuilder();
             blocksBuilderAction(blocksBuilder);
@@ -107,7 +107,7 @@ namespace SlackMessageBuilder
         /// <param name="builder"></param>
         /// <param name="blocks"></param>
         /// <returns></returns>
-        public static MessageBuilder WithBlocks(this MessageBuilder builder, IEnumerable<IBlockElement> blocks)
+        public static SlackMessageBuilder WithBlocks(this SlackMessageBuilder builder, IEnumerable<IBlockElement> blocks)
         {
             builder.AddBlocks(blocks);
             return builder;

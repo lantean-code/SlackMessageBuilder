@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace SlackMessageBuilder.Converters.NewtonsoftJson
+namespace Slack.MessageBuilder.Converters.NewtonsoftJson
 {
     internal class JsonStringToLowerEnumConverter : JsonConverter
     {

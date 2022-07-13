@@ -3,7 +3,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder.Converters.SystemTextJson
+namespace Slack.MessageBuilder.Converters.SystemTextJson
 {
     internal class JsonStringToLowerEnumConverter : JsonConverterFactory
     {

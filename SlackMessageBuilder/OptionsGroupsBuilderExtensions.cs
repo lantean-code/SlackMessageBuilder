@@ -1,9 +1,9 @@
-﻿using SlackMessageBuilder.Builders;
+﻿using Slack.MessageBuilder.Builders;
+using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     /// <summary>
     /// Options Groups Builder Extensions

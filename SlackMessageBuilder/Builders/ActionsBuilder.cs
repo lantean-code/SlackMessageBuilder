@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Slack.MessageBuilder;
+using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Builders
+namespace Slack.MessageBuilder.Builders
 {
     internal class ActionsBuilder : IElementsBuilder<IActionsElement>
     {

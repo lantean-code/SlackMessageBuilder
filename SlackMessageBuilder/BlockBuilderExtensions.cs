@@ -1,8 +1,9 @@
-﻿using SlackMessageBuilder.Builders;
+﻿using Slack.MessageBuilder.Builders;
+using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace SlackMessageBuilder
+namespace Slack.MessageBuilder
 {
     /// <summary>
     /// Fluent builder for <see cref="Block"/>s.

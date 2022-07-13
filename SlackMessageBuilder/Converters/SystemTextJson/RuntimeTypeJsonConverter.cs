@@ -1,10 +1,11 @@
 ﻿#if SYSTEMTEXTJSON || DEBUG
+using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SlackMessageBuilder.Converters.SystemTextJson
+namespace Slack.MessageBuilder.Converters.SystemTextJson
 {
     internal class RuntimeTypeJsonConverter : JsonConverterFactory
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace SlackMessageBuilder.Converters.NewtonsoftJson
+namespace Slack.MessageBuilder.Converters.NewtonsoftJson
 {
     internal class DateTimeDateJsonConverter : JsonConverter<DateTime>
     {

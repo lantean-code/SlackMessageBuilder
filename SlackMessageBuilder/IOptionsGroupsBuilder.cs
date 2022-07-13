@@ -1,4 +1,6 @@
-﻿namespace SlackMessageBuilder
+﻿using Slack.MessageBuilder.Objects;
+
+namespace Slack.MessageBuilder
 {
     /// <summary>
     ///
