@@ -6,7 +6,7 @@
 	<Nullable>enable</Nullable>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
-	<Version>0.2.0-beta</Version>
+	<Version>0.3.0-beta</Version>
 	<Authors>ahjephson</Authors>
 	<Company>ahjephson</Company>
 	<RepositoryUrl>https://github.com/ahjephson/SlackMessageBuilder.git</RepositoryUrl>
