@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#if NEWTONSOFTJSON || DEBUG
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.MessageBuilder.Objects;
 using System;
@@ -48,3 +49,4 @@ namespace Slack.MessageBuilder.Converters.NewtonsoftJson
         }
     }
 }
+#endif
