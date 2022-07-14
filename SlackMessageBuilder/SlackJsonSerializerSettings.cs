@@ -21,6 +21,7 @@ namespace Slack.MessageBuilder
             Settings.Converters.Add(new JsonStringToLowerEnumConverter());
             Settings.Converters.Add(new RuntimeTypeJsonConverter());
             Settings.Converters.Add(new TimeSpanTimeJsonConverter());
+            Settings.Converters.Add(new MetadataUrlEncodedJsonConverter());
         }
     }
 }

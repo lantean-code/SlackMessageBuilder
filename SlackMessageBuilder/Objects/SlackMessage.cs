@@ -5,7 +5,7 @@ namespace Slack.MessageBuilder.Objects
     /// <summary>
     ///
     /// </summary>
-    public class SlackMessage : SlackMessageBase
+    public sealed class SlackMessage : SlackMessageBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackMessageBase"/> class.

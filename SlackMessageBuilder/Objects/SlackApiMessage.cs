@@ -5,7 +5,7 @@ namespace Slack.MessageBuilder.Objects
     /// <summary>
     ///
     /// </summary>
-    public class SlackApiMessage : SlackMessageBase
+    public sealed class SlackApiMessage : SlackMessageBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackApiMessage"/> class.
@@ -37,7 +37,7 @@ namespace Slack.MessageBuilder.Objects
             string? iconEmoji = null,
             string? iconUrl = null,
             bool? linkNames = null,
-            string? metadata = null,
+            Metadata? metadata = null,
             string? parse = null,
             bool? replyBroadcast = null,
             bool? unfurlLinks = null,
@@ -115,7 +115,7 @@ namespace Slack.MessageBuilder.Objects
 #elif SYSTEMTEXTJSON|| DEBUG
         [System.Text.Json.Serialization.JsonPropertyName("metadata")]
 #endif
-        public string? Metadata { get; }
+        public Metadata? Metadata { get; }
 
         /// <summary>
         /// Change how messages are treated. See <a href="https://api.slack.com/methods/chat.postMessage#formatting">https://api.slack.com/methods/chat.postMessage#formatting</a>.

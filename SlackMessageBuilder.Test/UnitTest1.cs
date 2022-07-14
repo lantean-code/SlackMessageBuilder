@@ -9,8 +9,9 @@ namespace Slack.MessageBuilder.Test
         public void Test1()
         {
             var smb = SlackMessageBuilder
-                .Create("This is some fallback text", true)
-                .ForChannel("global-platform-be")
+                .CreateApiMessage("global-be", "This is some fallback text", true)
+                //.CreateMessage("This is some fallback text", true)
+                //.ForChannel("global-platform-be")
                 .WithBlocks(builder =>
                 {
                     builder.AddTextSectionBlock("This is a plain text section block.");
