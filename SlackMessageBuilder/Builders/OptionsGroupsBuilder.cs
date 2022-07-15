@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Slack.MessageBuilder.Objects;
+using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Builders
+namespace Slack.MessageBuilder.Builders
 {
-    internal class OptionsGroupsBuilder : IOptionsGroupsBuilder
+    internal class OptionsGroupsBuilder<T> : IOptionsGroupsBuilder<T>
     {
         private readonly List<OptionsGroup> _optionsGroups = new List<OptionsGroup>();
 
-        public IOptionsGroupsBuilder AddOptionsGroup(OptionsGroup optionsGroup)
+        public IOptionsGroupsBuilder<T> AddOptionsGroup(OptionsGroup optionsGroup)
         {
             _optionsGroups.Add(optionsGroup);
             return this;

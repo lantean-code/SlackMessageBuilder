@@ -5,19 +5,56 @@
 	<LangVersion>9.0</LangVersion>
 	<Nullable>enable</Nullable>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
+	<Version>1.0.0</Version>
+	<Authors>ahjephson</Authors>
+	<Company>ahjephson</Company>
+	<RepositoryUrl>https://github.com/ahjephson/SlackMessageBuilder.git</RepositoryUrl>
+	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	<PackageProjectUrl>https://github.com/ahjephson/SlackMessageBuilder</PackageProjectUrl>
+	<Description>Fluent message builder for Slack messages.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 	<DocumentationFile>./SlackMessageBuilder.xml</DocumentationFile>
+	<RootNamespace>$(MSBuildProjectName.Replace("Slack", "Slack."))</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'">
+    <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName).NewtonsoftJson</AssemblyName>
+	<DocumentationFile>./SlackMessageBuilder.NewtonsoftJson.xml</DocumentationFile>
+	<PackageId>SlackMessageBuilder.NewtonsoftJson</PackageId>
+	<PackageTags>Slack API;Slack;Slack Message Builder;Newtonsoft.Json</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'">
+    <WarningsNotAsErrors>CS1591;CS0618</WarningsNotAsErrors>
+	<AssemblyName>$(MSBuildProjectName).SystemTextJson</AssemblyName>
+	<DocumentationFile>./SlackMessageBuilder.SystemTextJson.xml</DocumentationFile>
+	<PackageId>SlackMessageBuilder.SystemTextJson</PackageId>
+	<PackageTags>Slack API;Slack;Slack Message Builder;System.Text.Json</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+	<None Include="..\LICENSE.md" Link="LICENSE.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
+  <ItemGroup>
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'" />
+	<PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+	  <_Parameter1>Slack.MessageBuilder.Test</_Parameter1>
+	</AssemblyAttribute>
+	<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+	  <_Parameter1>SlackMessageBuilder.Test</_Parameter1>
+	</AssemblyAttribute>
+  </ItemGroup>
 </Project>

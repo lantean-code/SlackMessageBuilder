@@ -1,4 +1,4 @@
-﻿namespace SlackMessageBuilder
+﻿namespace Slack.MessageBuilder
 {
     /// <summary>
     /// A builder that can create a list of elements

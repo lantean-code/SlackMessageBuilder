@@ -1,110 +1,177 @@
-﻿using System;
+﻿using Slack.MessageBuilder.Objects;
+using System;
 using System.Collections.Generic;
 
-namespace SlackMessageBuilder.Builders
+namespace Slack.MessageBuilder.Builders
 {
     /// <summary>
-    /// Fluent builder for <see cref="SlackMessage"/>s.
+    ///
     /// </summary>
-    public class MessageBuilder
+    /// <typeparam name="T"></typeparam>
+    public class MessageBuilder<T> where T : SlackMessageBase
     {
-        private List<Attachment>? _attachments;
+        private bool? _asUser;
+        private List<AttachmentBase>? _attachments;
         private List<IBlockElement>? _blocks;
+        private string? _channel;
+        private string? _iconEmoji;
+        private string? _iconUrl;
+        private string? _username;
 
-        private string _text;
-        private string? _channel = null;
-        private bool? _isMarkdown;
-        private string? _threadId = null;
-        private bool _isApiMessage = false;
-        private bool? _asUser = null;
-        private string? _iconEmoji = null;
-        private string? _iconUrl = null;
-        private bool? _linkNames = null;
-        private string? _metadata = null;
-        private string? _parse = null;
-        private bool? _replyBroadcast = null;
-        private bool? _unfurlLinks = null;
-        private bool? _unfurlMesage = null;
-        private string? _username = null;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SlackMessageBuilder"/> class.
+        /// </summary>
+        /// <param name="text">The usage of this field changes depending on whether you're using blocks or not. If you are, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with mrkdwn. This field is not enforced as required when using blocks, however it is highly recommended that you include it as the aforementioned fallback.</param>
+        /// <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
         internal MessageBuilder(string text, bool? isMarkdown = null)
         {
-            _text = text;
-            _isMarkdown = isMarkdown;
+            Text = text;
+            IsMarkdown = isMarkdown;
         }
 
-        internal void SetText(string text, bool? isMarkdown = null)
+        internal bool? AsUser
         {
-            _text = text;
-            _isMarkdown = isMarkdown;
+            get { return _asUser; }
+            set
+            {
+                if (value ?? false)
+                {
+                    _username = null;
+                }
+                _asUser = value;
+            }
         }
 
-        internal void SetChannel(string channel)
+        internal string? Channel
         {
-            _isApiMessage = true;
-            _channel = channel;
+            get
+            {
+                return _channel;
+            }
+            set
+            {
+                if (value == "")
+                {
+                    value = null;
+                }
+                _channel = value;
+            }
         }
 
-        internal void SetThread(string threadId)
+        internal string? IconEmoji
         {
-            _threadId = threadId;
+            get { return _iconEmoji; }
+            set
+            {
+                _asUser = false;
+                _iconUrl = null;
+                _iconEmoji = value;
+            }
         }
 
-        internal void SetAsUser(bool asUser)
+        internal string? IconUrl
         {
-            _asUser = asUser;
+            get { return _iconUrl; }
+            set
+            {
+                _asUser = false;
+                _iconEmoji = null;
+                _iconUrl = value;
+            }
         }
 
-        internal void SetIconEmoji(string iconEmoji)
+        internal bool? IsMarkdown { get; set; }
+
+        internal bool? LinkNames { get; set; }
+
+        internal Metadata? Metadata { get; set; }
+
+        internal string? Parse { get; set; }
+
+        internal bool? ReplyBroadcast { get; set; }
+
+        internal string Text { get; set; }
+
+        internal string? ThreadId { get; set; }
+
+        internal bool? UnfurlLinks { get; set; }
+
+        internal bool? UnfurlMedia { get; set; }
+
+        internal string? Username
         {
-            _iconEmoji = iconEmoji;
+            get { return _username; }
+            set
+            {
+                _asUser = false;
+                _username = value;
+            }
         }
 
-        internal void SetIconUrl(string iconUrl)
+        private bool IsApiMessage
         {
-            _iconUrl = iconUrl;
+            get { return _channel is not null; }
         }
 
-        internal void SetMetadata(string metadata)
+        /// <summary>
+        /// Builds a new Slack Message from the builder.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public T Build()
         {
-            _metadata = metadata;
+            var type = typeof(T);
+            if (type == typeof(SlackApiMessage))
+            {
+                if (!IsApiMessage)
+                {
+                    throw new InvalidOperationException($"Unable to build api message as {typeof(T).Name}.");
+                }
+                if (Channel is null)
+                {
+                    throw new InvalidOperationException("Channel is required to build a SlackMessage.");
+                }
+
+                SlackMessageBase message = new SlackApiMessage(
+                    Channel,
+                    Text,
+                    IsMarkdown,
+                    _blocks,
+                    _attachments,
+                    ThreadId,
+                    AsUser,
+                    IconEmoji,
+                    IconUrl,
+                    LinkNames,
+                    Metadata,
+                    Parse,
+                    ReplyBroadcast,
+                    UnfurlLinks,
+                    UnfurlMedia,
+                    Username);
+
+                return (T)message;
+            }
+
+            if (typeof(T) == typeof(SlackMessage))
+            {
+                SlackMessageBase message = new SlackMessage(
+                    Text,
+                    IsMarkdown,
+                    _blocks,
+                    _attachments,
+                    ThreadId);
+
+                return (T)message;
+            }
+
+            throw new InvalidOperationException($"Unsupported type: {type.Name}");
         }
 
-        internal void SetParse(string parse)
+        internal void AddAttachment(AttachmentBase attachment)
         {
-            _parse = parse;
-        }
-
-        internal void SetReplyBroadcast(bool replyBroadcast)
-        {
-            _replyBroadcast = replyBroadcast;
-        }
-
-        internal void SetUnfurlLinks(bool unfurlLinks)
-        {
-            _unfurlLinks = unfurlLinks;
-        }
-
-        internal void SetUnfurlMesage(bool unfurlMesage)
-        {
-            _unfurlMesage = unfurlMesage;
-        }
-
-        internal void SetUsername(string username)
-        {
-            _username = username;
-        }
-
-        internal void AddAttachment(Attachment attachment)
-        {
-            _attachments ??= new List<Attachment>();
+            _attachments ??= new List<AttachmentBase>();
             _attachments.Add(attachment);
-        }
-
-        internal void AddBlocks(IEnumerable<IBlockElement> slackBlocks)
-        {
-            _blocks ??= new List<IBlockElement>();
-            _blocks.AddRange(slackBlocks);
         }
 
         internal void AddBlock(IBlockElement slackBlock)
@@ -113,49 +180,10 @@ namespace SlackMessageBuilder.Builders
             _blocks.Add(slackBlock);
         }
 
-        /// <summary>
-        /// Builds a new Slack Message from the builder.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public SlackMessage Build()
+        internal void AddBlocks(IEnumerable<IBlockElement> slackBlocks)
         {
-            SlackMessage slackMessage;
-            if (_isApiMessage)
-            {
-                if (_channel is null)
-                {
-                    throw new InvalidOperationException("Channel is required to build a SlackMessage.");
-                }
-                slackMessage = new SlackApiMessage(
-                    _channel,
-                    _text,
-                    _isMarkdown,
-                    _blocks,
-                    _attachments,
-                    _threadId,
-                    _asUser,
-                    _iconEmoji,
-                    _iconUrl,
-                    _linkNames,
-                    _metadata,
-                    _parse,
-                    _replyBroadcast,
-                    _unfurlLinks,
-                    _unfurlMesage,
-                    _username);
-            }
-            else
-            {
-                slackMessage = new SlackMessage(
-                    _text,
-                    _isMarkdown,
-                    _blocks,
-                    _attachments,
-                    _threadId);
-            }
-
-            return slackMessage;
+            _blocks ??= new List<IBlockElement>();
+            _blocks.AddRange(slackBlocks);
         }
     }
 }
