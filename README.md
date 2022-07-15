@@ -10,7 +10,7 @@ Separate packages for System.Text.Json and Newtonsoft.Json
 
 ## How to use
 
-A piece of code can explain a lot.
+Example
 
 ```csharp
 var builder = SlackMessageBuilder.CreateApiMessage("my-channel", "*Some fallback text*", isMarkdown: true)
