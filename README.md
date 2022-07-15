@@ -1,4 +1,5 @@
-SlackMessageBuidler.NewtonsoftJson [![NuGet version](https://badge.fury.io/nu/SlackMessageBuidler.NewtonsoftJson.svg)](https://badge.fury.io/nu/SlackMessageBuidler.NewtonsoftJson)
+SlackMessageBuilder.NewtonsoftJson [![NuGet version](https://badge.fury.io/nu/SlackMessageBuilder.NewtonsoftJson.svg)](https://badge.fury.io/nu/SlackMessageBuidler.NewtonsoftJson)
+
 SlackMessageBuilder.SystemTextJson [![NuGet version](https://badge.fury.io/nu/SlackMessageBuilder.SystemTextJson.svg)](https://badge.fury.io/nu/SlackMessageBuilder.SystemTextJson)
 
 # SlackMessageBuilder
