@@ -14,12 +14,13 @@ namespace Slack.MessageBuilder
         /// Sets the thread id. This will replace any existing value.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="threadId"></param>
+        /// <param name="threadId">The ID of another un-threaded message to reply to.</param>
+        /// <param name="broadcast">Indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.</param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> AsReply(this MessageBuilder<SlackMessage> builder, string threadId)
+        public static MessageBuilder<SlackMessage> AsReply(this MessageBuilder<SlackMessage> builder, string threadId, bool? broadcast = null)
         {
-            builder.SetThread(threadId);
-
+            builder.ThreadId = threadId;
+            builder.ReplyBroadcast = broadcast;
             return builder;
         }
 
@@ -27,12 +28,35 @@ namespace Slack.MessageBuilder
         /// Sets the thread id. This will replace any existing value.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="threadId"></param>
+        /// <param name="threadId">The ID of another un-threaded message to reply to.</param>
+        /// <param name="broadcast">Indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.</param>
         /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> AsReply(this MessageBuilder<SlackApiMessage> builder, string threadId)
+        public static MessageBuilder<SlackApiMessage> AsReply(this MessageBuilder<SlackApiMessage> builder, string threadId, bool? broadcast = null)
         {
-            builder.SetThread(threadId);
+            builder.ThreadId = threadId;
+            builder.ReplyBroadcast = broadcast;
+            return builder;
+        }
 
+        /// <summary>
+        /// Disable unfurling of media content.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> DisableUnfurlMedia(this MessageBuilder<SlackApiMessage> builder)
+        {
+            builder.UnfurlMedia = false;
+            return builder;
+        }
+
+        /// <summary>
+        /// Enable unfurling of primarily text-based content
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> EnableUnfurlLinks(this MessageBuilder<SlackApiMessage> builder)
+        {
+            builder.UnfurlLinks = true;
             return builder;
         }
 
@@ -44,8 +68,7 @@ namespace Slack.MessageBuilder
         /// <returns></returns>
         public static MessageBuilder<SlackApiMessage> ForChannel(this MessageBuilder<SlackApiMessage> builder, string channel)
         {
-            builder.SetChannel(channel);
-
+            builder.Channel = channel;
             return builder;
         }
 
@@ -154,19 +177,6 @@ namespace Slack.MessageBuilder
         }
 
         /// <summary>
-        /// Set your bot's user name.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="username">Set your bot's user name. as_user will be set to false.</param>
-        /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> WithUsername(this MessageBuilder<SlackApiMessage> builder, string username)
-        {
-            builder.SetAsUser(false);
-            builder.SetUsername(username);
-            return builder;
-        }
-
-        /// <summary>
         /// Emoji to use as the icon for this message.
         /// </summary>
         /// <param name="builder"></param>
@@ -174,9 +184,7 @@ namespace Slack.MessageBuilder
         /// <returns></returns>
         public static MessageBuilder<SlackApiMessage> WithIconEmoji(this MessageBuilder<SlackApiMessage> builder, string iconEmoji)
         {
-            builder.SetAsUser(false);
-            builder.SetIconUrl(null);
-            builder.SetIconEmoji(iconEmoji);
+            builder.IconEmoji = iconEmoji;
             return builder;
         }
 
@@ -188,9 +196,44 @@ namespace Slack.MessageBuilder
         /// <returns></returns>
         public static MessageBuilder<SlackApiMessage> WithIconUrl(this MessageBuilder<SlackApiMessage> builder, string iconUrl)
         {
-            builder.SetAsUser(false);
-            builder.SetIconEmoji(null);
-            builder.SetIconUrl(iconUrl);
+            builder.IconUrl = iconUrl;
+            return builder;
+        }
+
+        /// <summary>
+        /// Metadata you post to Slack is accessible to any app or user who is a member of that workspace.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="eventType">Event type</param>
+        /// <param name="eventPayload">Event payload</param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> WithMetadata(this MessageBuilder<SlackApiMessage> builder, string eventType, string eventPayload)
+        {
+            builder.Metadata = new Metadata(eventType, eventPayload);
+            return builder;
+        }
+
+        /// <summary>
+        /// Change how messages are treated.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="parseOptions">Options to configure text parsing.</param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> WithParse(this MessageBuilder<SlackApiMessage> builder, ParseOptions parseOptions)
+        {
+            builder.Parse = parseOptions.ToValue();
+            return builder;
+        }
+
+        /// <summary>
+        /// Set your bot's user name.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="username">Set your bot's user name. as_user will be set to false.</param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> WithUsername(this MessageBuilder<SlackApiMessage> builder, string username)
+        {
+            builder.Username = username;
             return builder;
         }
     }

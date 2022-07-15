@@ -6,14 +6,14 @@ using System.Text.Json.Serialization;
 namespace Slack.MessageBuilder
 {
     /// <summary>
-    ///
+    /// Options for System.Text.Json serialization.
     /// </summary>
     public static class SlackJsonSerializerOptions
     {
         /// <summary>
-        ///
+        /// These options ensure the JSON output matches the specification for the Slack API.
         /// </summary>
-        public static JsonSerializerOptions Options { get; } = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        public static JsonSerializerOptions Options { get; } = new JsonSerializerOptions();
 
         static SlackJsonSerializerOptions()
         {

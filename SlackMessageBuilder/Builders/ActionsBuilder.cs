@@ -1,5 +1,4 @@
-﻿using Slack.MessageBuilder;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Slack.MessageBuilder.Builders
 {
@@ -7,15 +6,15 @@ namespace Slack.MessageBuilder.Builders
     {
         private readonly List<IActionsElement> _elements = new List<IActionsElement>();
 
-        internal IReadOnlyList<IActionsElement> Build()
-        {
-            return _elements.AsReadOnly();
-        }
-
         public IElementsBuilder<IActionsElement> AddElement(IActionsElement element)
         {
             _elements.Add(element);
             return this;
+        }
+
+        internal IReadOnlyList<IActionsElement> Build()
+        {
+            return _elements.AsReadOnly();
         }
     }
 }

@@ -1,34 +1,22 @@
 ﻿using Slack.MessageBuilder.Objects;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Slack.MessageBuilder.Builders
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class MessageBuilder<T> where T : SlackMessageBase
     {
+        private bool? _asUser;
         private List<AttachmentBase>? _attachments;
         private List<IBlockElement>? _blocks;
-
-        private string _text;
-        private string? _channel = null;
-        private bool? _isMarkdown;
-        private string? _threadId = null;
-        private bool _isApiMessage = false;
-        private bool? _asUser = null;
-        private string? _iconEmoji = null;
-        private string? _iconUrl = null;
-        private bool? _linkNames = null;
-        private Metadata? _metadata = null;
-        private string? _parse = null;
-        private bool? _replyBroadcast = null;
-        private bool? _unfurlLinks = null;
-        private bool? _unfurlMesage = null;
-        private string? _username = null;
+        private string? _channel;
+        private string? _iconEmoji;
+        private string? _iconUrl;
+        private string? _username;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackMessageBuilder"/> class.
@@ -37,97 +25,92 @@ namespace Slack.MessageBuilder.Builders
         /// <param name="isMarkdown">Determines whether the text field is rendered according to mrkdwn formatting or not. Defaults to true.</param>
         internal MessageBuilder(string text, bool? isMarkdown = null)
         {
-            _text = text;
-            _isMarkdown = isMarkdown;
+            Text = text;
+            IsMarkdown = isMarkdown;
         }
 
-        internal void SetText(string text, bool? isMarkdown = null)
+        internal bool? AsUser
         {
-            _text = text;
-            _isMarkdown = isMarkdown;
-        }
-
-        internal void SetChannel(string? channel)
-        {
-            if (channel == "")
+            get { return _asUser; }
+            set
             {
-                channel = null;
+                if (value ?? false)
+                {
+                    _username = null;
+                }
+                _asUser = value;
             }
-            _isApiMessage = channel is not null;
-            _channel = channel;
         }
 
-        internal void SetThread(string? threadId)
+        internal string? Channel
         {
-            _threadId = threadId;
+            get
+            {
+                return _channel;
+            }
+            set
+            {
+                if (value == "")
+                {
+                    value = null;
+                }
+                _channel = value;
+            }
         }
 
-        internal void SetAsUser(bool? asUser)
+        internal string? IconEmoji
         {
-            _asUser = asUser;
+            get { return _iconEmoji; }
+            set
+            {
+                _asUser = false;
+                _iconUrl = null;
+                _iconEmoji = value;
+            }
         }
 
-        internal void SetIconEmoji(string? iconEmoji)
+        internal string? IconUrl
         {
-            _iconEmoji = iconEmoji;
+            get { return _iconUrl; }
+            set
+            {
+                _asUser = false;
+                _iconEmoji = null;
+                _iconUrl = value;
+            }
         }
 
-        internal void SetIconUrl(string? iconUrl)
+        internal bool? IsMarkdown { get; set; }
+
+        internal bool? LinkNames { get; set; }
+
+        internal Metadata? Metadata { get; set; }
+
+        internal string? Parse { get; set; }
+
+        internal bool? ReplyBroadcast { get; set; }
+
+        internal string Text { get; set; }
+
+        internal string? ThreadId { get; set; }
+
+        internal bool? UnfurlLinks { get; set; }
+
+        internal bool? UnfurlMedia { get; set; }
+
+        internal string? Username
         {
-            _iconUrl = iconUrl;
+            get { return _username; }
+            set
+            {
+                _asUser = false;
+                _username = value;
+            }
         }
 
-        internal void SetMetadata(Metadata? metadata)
+        private bool IsApiMessage
         {
-            _metadata = metadata;
-        }
-
-        internal void SetLinknames(bool? linkNames)
-        {
-            _linkNames = linkNames;
-        }
-
-        internal void SetParse(string? parse)
-        {
-            _parse = parse;
-        }
-
-        internal void SetReplyBroadcast(bool? replyBroadcast)
-        {
-            _replyBroadcast = replyBroadcast;
-        }
-
-        internal void SetUnfurlLinks(bool? unfurlLinks)
-        {
-            _unfurlLinks = unfurlLinks;
-        }
-
-        internal void SetUnfurlMesage(bool? unfurlMesage)
-        {
-            _unfurlMesage = unfurlMesage;
-        }
-
-        internal void SetUsername(string? username)
-        {
-            _username = username;
-        }
-
-        internal void AddAttachment(AttachmentBase attachment)
-        {
-            _attachments ??= new List<AttachmentBase>();
-            _attachments.Add(attachment);
-        }
-
-        internal void AddBlocks(IEnumerable<IBlockElement> slackBlocks)
-        {
-            _blocks ??= new List<IBlockElement>();
-            _blocks.AddRange(slackBlocks);
-        }
-
-        internal void AddBlock(IBlockElement slackBlock)
-        {
-            _blocks ??= new List<IBlockElement>();
-            _blocks.Add(slackBlock);
+            get { return _channel is not null; }
         }
 
         /// <summary>
@@ -140,32 +123,32 @@ namespace Slack.MessageBuilder.Builders
             var type = typeof(T);
             if (type == typeof(SlackApiMessage))
             {
-                if (!_isApiMessage)
+                if (!IsApiMessage)
                 {
                     throw new InvalidOperationException($"Unable to build api message as {typeof(T).Name}.");
                 }
-                if (_channel is null)
+                if (Channel is null)
                 {
                     throw new InvalidOperationException("Channel is required to build a SlackMessage.");
                 }
 
                 SlackMessageBase message = new SlackApiMessage(
-                    _channel,
-                    _text,
-                    _isMarkdown,
+                    Channel,
+                    Text,
+                    IsMarkdown,
                     _blocks,
                     _attachments,
-                    _threadId,
-                    _asUser,
-                    _iconEmoji,
-                    _iconUrl,
-                    _linkNames,
-                    _metadata,
-                    _parse,
-                    _replyBroadcast,
-                    _unfurlLinks,
-                    _unfurlMesage,
-                    _username);
+                    ThreadId,
+                    AsUser,
+                    IconEmoji,
+                    IconUrl,
+                    LinkNames,
+                    Metadata,
+                    Parse,
+                    ReplyBroadcast,
+                    UnfurlLinks,
+                    UnfurlMedia,
+                    Username);
 
                 return (T)message;
             }
@@ -173,16 +156,34 @@ namespace Slack.MessageBuilder.Builders
             if (typeof(T) == typeof(SlackMessage))
             {
                 SlackMessageBase message = new SlackMessage(
-                    _text,
-                    _isMarkdown,
+                    Text,
+                    IsMarkdown,
                     _blocks,
                     _attachments,
-                    _threadId);
+                    ThreadId);
 
                 return (T)message;
             }
 
             throw new InvalidOperationException($"Unsupported type: {type.Name}");
+        }
+
+        internal void AddAttachment(AttachmentBase attachment)
+        {
+            _attachments ??= new List<AttachmentBase>();
+            _attachments.Add(attachment);
+        }
+
+        internal void AddBlock(IBlockElement slackBlock)
+        {
+            _blocks ??= new List<IBlockElement>();
+            _blocks.Add(slackBlock);
+        }
+
+        internal void AddBlocks(IEnumerable<IBlockElement> slackBlocks)
+        {
+            _blocks ??= new List<IBlockElement>();
+            _blocks.AddRange(slackBlocks);
         }
     }
 }

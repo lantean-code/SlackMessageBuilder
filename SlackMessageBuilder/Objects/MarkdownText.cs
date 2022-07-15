@@ -26,5 +26,17 @@
         [System.Text.Json.Serialization.JsonPropertyName("verbatim")]
 #endif
         public bool? Verbatim { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        public static implicit operator string(MarkdownText text) => text.Text;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        public static implicit operator MarkdownText(string text) => new MarkdownText(text);
     }
 }

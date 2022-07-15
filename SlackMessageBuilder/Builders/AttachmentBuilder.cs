@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Slack.MessageBuilder
+namespace Slack.MessageBuilder.Builders
 {
     /// <summary>
     ///

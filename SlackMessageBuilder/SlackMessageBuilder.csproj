@@ -48,4 +48,13 @@
 	<PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'" />
   </ItemGroup>
+
+  <ItemGroup>
+	<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+	  <_Parameter1>Slack.MessageBuilder.Test</_Parameter1>
+	</AssemblyAttribute>
+	<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+	  <_Parameter1>SlackMessageBuilder.Test</_Parameter1>
+	</AssemblyAttribute>
+  </ItemGroup>
 </Project>

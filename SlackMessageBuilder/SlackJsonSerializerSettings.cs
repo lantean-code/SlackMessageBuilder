@@ -5,12 +5,12 @@ using Slack.MessageBuilder.Converters.NewtonsoftJson;
 namespace Slack.MessageBuilder
 {
     /// <summary>
-    /// 
+    /// Options for Newtonsoft.Json serialization.
     /// </summary>
     public static class SlackJsonSerializerSettings
     {
         /// <summary>
-        /// 
+        /// These options ensure the JSON output matches the specification for the Slack API.
         /// </summary>
         public static JsonSerializerSettings Settings { get; } = new JsonSerializerSettings();
 

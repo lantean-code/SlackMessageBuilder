@@ -1,7 +1,7 @@
 ﻿namespace Slack.MessageBuilder.Objects
 {
     /// <summary>
-    /// An object containing some text, formatted either as plain_text.
+    /// An object containing some text, formatted as plain_text.
     ///
     /// <a href="https://api.slack.com/reference/block-kit/composition-objects#text">https://api.slack.com/reference/block-kit/composition-objects#text</a>
     /// </summary>
@@ -26,5 +26,17 @@
         [System.Text.Json.Serialization.JsonPropertyName("emoji")]
 #endif
         public bool? Emoji { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        public static implicit operator string(PlainText text) => text.Text;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        public static implicit operator PlainText(string text) => new PlainText(text);
     }
 }
