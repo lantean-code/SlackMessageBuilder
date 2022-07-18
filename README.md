@@ -15,15 +15,15 @@ Example
 ```csharp
 var builder = SlackMessageBuilder.CreateApiMessage("my-channel", "*Some fallback text*", isMarkdown: true)
     .WithBlocks(blockBuilder => blockBuilder
-    .AddHeaderBlock("Header Text")
-    .AddContextBlock(contextBuilder =>
-    {
-        contextBuilder.AddImage("https://url-to-image", "alt-text");
-        contextBuilder.AddMarkdown("*Do you like my image?*");
-    })
-    .AddImageBlock("https://url-to-big-image", title: "Big Image Title")
-    .AddDividerBlock()
-    .AddMarkdownSectionBlock("A markdown section block"));
+        .AddHeaderBlock("Header Text")
+        .AddContextBlock(contextBuilder =>
+        {
+            contextBuilder.AddImage("https://url-to-image", "alt-text");
+            contextBuilder.AddMarkdown("*Do you like my image?*");
+        })
+        .AddImageBlock("https://url-to-big-image", title: "Big Image Title")
+        .AddDividerBlock()
+        .AddMarkdownSectionBlock("A markdown section block"));
 
 var message = builder.Build();
 
