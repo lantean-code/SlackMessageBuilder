@@ -4,7 +4,7 @@ SlackMessageBuilder.SystemTextJson [![NuGet version](https://badge.fury.io/nu/Sl
 
 # SlackMessageBuilder
 
-A fluent style builder for creating Slack Messages. Supports both legacy Attachments and <https://api.slack.com/block-kit|Block Kit>. Fully documented with details from the Slack API reference.
+A fluent style builder for creating Slack Messages. Supports both legacy Attachments and [Block Kit](https://api.slack.com/block-kit). Fully documented with details from the Slack API reference.
 
 Separate packages for System.Text.Json and Newtonsoft.Json
 
