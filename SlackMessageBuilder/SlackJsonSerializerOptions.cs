@@ -17,7 +17,7 @@ namespace Slack.MessageBuilder
 
         static SlackJsonSerializerOptions()
         {
-            Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+            Options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             Options.Converters.Add(new DateTimeDateJsonConverter());
             Options.Converters.Add(new JsonStringToLowerEnumConverter());
             Options.Converters.Add(new TimeSpanTimeJsonConverter());
