@@ -108,10 +108,14 @@ namespace Slack.MessageBuilder.Builders
             }
         }
 
+        internal int? PostAt { get; set; }
+
         private bool IsApiMessage
         {
             get { return _channel is not null; }
         }
+
+        internal Func<IMessageBuilderContext, T>? InstanceFactory { get; set; }
 
         /// <summary>
         /// Builds a new Slack Message from the builder.
@@ -121,6 +125,7 @@ namespace Slack.MessageBuilder.Builders
         public T Build()
         {
             var type = typeof(T);
+            SlackMessageBase message;
             if (type == typeof(SlackApiMessage))
             {
                 if (!IsApiMessage)
@@ -132,7 +137,7 @@ namespace Slack.MessageBuilder.Builders
                     throw new InvalidOperationException("Channel is required to build a SlackMessage.");
                 }
 
-                SlackMessageBase message = new SlackApiMessage(
+                message = new SlackApiMessage(
                     Channel,
                     Text,
                     IsMarkdown,
@@ -148,24 +153,22 @@ namespace Slack.MessageBuilder.Builders
                     ReplyBroadcast,
                     UnfurlLinks,
                     UnfurlMedia,
-                    Username);
+                    Username,
+                    PostAt);
 
                 return (T)message;
             }
 
-            if (typeof(T) == typeof(SlackMessage))
+            if (InstanceFactory is null)
             {
-                SlackMessageBase message = new SlackMessage(
-                    Text,
-                    IsMarkdown,
-                    _blocks,
-                    _attachments,
-                    ThreadId);
-
-                return (T)message;
+                throw new InvalidOperationException($"Unable to construct instance of {type.Name}. InstanceFactory is null.");
             }
 
-            throw new InvalidOperationException($"Unsupported type: {type.Name}");
+            var context = new MessageBuilderContext(Text, IsMarkdown, _attachments, _blocks, ThreadId);
+
+            message = InstanceFactory(context);
+
+            return (T)message;
         }
 
         internal void AddAttachment(AttachmentBase attachment)

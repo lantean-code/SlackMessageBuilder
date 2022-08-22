@@ -26,6 +26,7 @@ namespace Slack.MessageBuilder.Objects
         /// <param name="unfurlLinks">Pass true to enable unfurling of primarily text-based content.</param>
         /// <param name="unfurlMedia">Pass false to disable unfurling of media content.</param>
         /// <param name="username">Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.</param>
+        /// <param name="postAt">Set time for message to be scheduled.</param>
         public SlackApiMessage(
             string channel,
             string text,
@@ -42,7 +43,8 @@ namespace Slack.MessageBuilder.Objects
             bool? replyBroadcast = null,
             bool? unfurlLinks = null,
             bool? unfurlMedia = null,
-            string? username = null) : base(text, isMarkdown, blocks, attachments, threadId)
+            string? username = null,
+            int? postAt = null) : base(text, isMarkdown, blocks, attachments, threadId)
         {
             Channel = channel;
             AsUser = asUser;
@@ -55,6 +57,7 @@ namespace Slack.MessageBuilder.Objects
             UnfurlLinks = unfurlLinks;
             UnfurlMedia = unfurlMedia;
             Username = username;
+            PostAt = postAt;
         }
 
         /// <summary>
@@ -166,5 +169,15 @@ namespace Slack.MessageBuilder.Objects
         [System.Text.Json.Serialization.JsonPropertyName("username")]
 #endif
         public string? Username { get; }
+
+        /// <summary>
+        /// Set your bot's user name. Must be used in conjunction with as_user set to false, otherwise ignored. See <a href="https://api.slack.com/methods/chat.postMessage#authorship">authorship</a> below.
+        /// </summary>
+#if NEWTONSOFTJSON || DEBUG
+        [Newtonsoft.Json.JsonProperty("post_at")]
+#elif SYSTEMTEXTJSON|| DEBUG
+        [System.Text.Json.Serialization.JsonPropertyName("username")]
+#endif
+        public int? PostAt { get; }
     }
 }

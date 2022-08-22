@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Slack.MessageBuilder.Builders;
+using System.Collections.Generic;
+using static System.Net.Mime.MediaTypeNames;
+using System.Net.Mail;
+using System.Threading;
 
 namespace Slack.MessageBuilder.Objects
 {
@@ -27,6 +31,19 @@ namespace Slack.MessageBuilder.Objects
             Blocks = blocks;
             Attachments = attachments;
             ThreadId = threadId;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SlackMessageBase"/> class.
+        /// </summary>
+        /// <param name="context"></param>
+        protected SlackMessageBase(IMessageBuilderContext context)
+        {
+            Text = context.Text;
+            IsMarkdown = context.IsMarkdown;
+            Blocks = context.Blocks;
+            Attachments = context.Attachments;
+            ThreadId = context.ThreadId;
         }
 
         /// <summary>
