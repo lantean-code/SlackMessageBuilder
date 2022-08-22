@@ -17,20 +17,6 @@ namespace Slack.MessageBuilder
         /// <param name="threadId">The ID of another un-threaded message to reply to.</param>
         /// <param name="broadcast">Indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.</param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> AsReply(this MessageBuilder<SlackMessage> builder, string threadId, bool? broadcast = null)
-        {
-            builder.ThreadId = threadId;
-            builder.ReplyBroadcast = broadcast;
-            return builder;
-        }
-
-        /// <summary>
-        /// Sets the thread id. This will replace any existing value.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="threadId">The ID of another un-threaded message to reply to.</param>
-        /// <param name="broadcast">Indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to false.</param>
-        /// <returns></returns>
         public static MessageBuilder<SlackApiMessage> AsReply(this MessageBuilder<SlackApiMessage> builder, string threadId, bool? broadcast = null)
         {
             builder.ThreadId = threadId;
@@ -78,21 +64,7 @@ namespace Slack.MessageBuilder
         /// <param name="builder"></param>
         /// <param name="attachmentBuilderAction"></param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> WithAttachment(this MessageBuilder<SlackMessage> builder, Action<AttachmentBuilder> attachmentBuilderAction)
-        {
-            var attachmentBuilder = new AttachmentBuilder();
-            attachmentBuilderAction(attachmentBuilder);
-            var attachment = attachmentBuilder.Build();
-            return builder.WithAttachment(attachment);
-        }
-
-        /// <summary>
-        /// Adds an attachement to the message using the <see cref="AttachmentBuilder"/>. This method is cumulative and can be called multiple times.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="attachmentBuilderAction"></param>
-        /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> WithAttachment(this MessageBuilder<SlackApiMessage> builder, Action<AttachmentBuilder> attachmentBuilderAction)
+        public static MessageBuilder<T> WithAttachment<T>(this MessageBuilder<T> builder, Action<AttachmentBuilder> attachmentBuilderAction) where T : SlackMessageBase
         {
             var attachmentBuilder = new AttachmentBuilder();
             attachmentBuilderAction(attachmentBuilder);
@@ -106,19 +78,7 @@ namespace Slack.MessageBuilder
         /// <param name="builder"></param>
         /// <param name="attachment"></param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> WithAttachment(this MessageBuilder<SlackMessage> builder, AttachmentBase attachment)
-        {
-            builder.AddAttachment(attachment);
-            return builder;
-        }
-
-        /// <summary>
-        /// Adds an attachment to the message. This method is cumulative and can be called multiple times.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="attachment"></param>
-        /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> WithAttachment(this MessageBuilder<SlackApiMessage> builder, AttachmentBase attachment)
+        public static MessageBuilder<T> WithAttachment<T>(this MessageBuilder<T> builder, AttachmentBase attachment) where T : SlackMessageBase
         {
             builder.AddAttachment(attachment);
             return builder;
@@ -130,21 +90,7 @@ namespace Slack.MessageBuilder
         /// <param name="builder"></param>
         /// <param name="blocksBuilderAction"></param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> WithBlocks(this MessageBuilder<SlackMessage> builder, Action<IBlocksBuilder> blocksBuilderAction)
-        {
-            var blocksBuilder = new BlocksBuilder();
-            blocksBuilderAction(blocksBuilder);
-            var blocks = blocksBuilder.Build();
-            return builder.WithBlocks(blocks);
-        }
-
-        /// <summary>
-        /// Adds blocks to the message using the <see cref="BlocksBuilder"/>. This method is cumulative and can be called multiple times.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="blocksBuilderAction"></param>
-        /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> WithBlocks(this MessageBuilder<SlackApiMessage> builder, Action<IBlocksBuilder> blocksBuilderAction)
+        public static MessageBuilder<T> WithBlocks<T>(this MessageBuilder<T> builder, Action<IBlocksBuilder> blocksBuilderAction) where T : SlackMessageBase
         {
             var blocksBuilder = new BlocksBuilder();
             blocksBuilderAction(blocksBuilder);
@@ -158,19 +104,7 @@ namespace Slack.MessageBuilder
         /// <param name="builder"></param>
         /// <param name="blocks"></param>
         /// <returns></returns>
-        public static MessageBuilder<SlackMessage> WithBlocks(this MessageBuilder<SlackMessage> builder, IEnumerable<IBlockElement> blocks)
-        {
-            builder.AddBlocks(blocks);
-            return builder;
-        }
-
-        /// <summary>
-        /// Adds blocks to the message. This method is cumulative and can be called multiple times.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="blocks"></param>
-        /// <returns></returns>
-        public static MessageBuilder<SlackApiMessage> WithBlocks(this MessageBuilder<SlackApiMessage> builder, IEnumerable<IBlockElement> blocks)
+        public static MessageBuilder<T> WithBlocks<T>(this MessageBuilder<T> builder, IEnumerable<IBlockElement> blocks) where T : SlackMessageBase
         {
             builder.AddBlocks(blocks);
             return builder;
@@ -234,6 +168,18 @@ namespace Slack.MessageBuilder
         public static MessageBuilder<SlackApiMessage> WithUsername(this MessageBuilder<SlackApiMessage> builder, string username)
         {
             builder.Username = username;
+            return builder;
+        }
+
+        /// <summary>
+        /// Set your bot's user name.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="postAt">The date for which the message should be scheduled.</param>
+        /// <returns></returns>
+        public static MessageBuilder<SlackApiMessage> WithScheduledDate(this MessageBuilder<SlackApiMessage> builder, int postAt)
+        {
+            builder.PostAt = postAt;
             return builder;
         }
     }
