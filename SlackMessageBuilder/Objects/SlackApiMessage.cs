@@ -176,7 +176,7 @@ namespace Slack.MessageBuilder.Objects
 #if NEWTONSOFTJSON || DEBUG
         [Newtonsoft.Json.JsonProperty("post_at")]
 #elif SYSTEMTEXTJSON|| DEBUG
-        [System.Text.Json.Serialization.JsonPropertyName("username")]
+        [System.Text.Json.Serialization.JsonPropertyName("post_at")]
 #endif
         public int? PostAt { get; }
     }

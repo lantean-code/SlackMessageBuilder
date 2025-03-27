@@ -6,7 +6,7 @@
 	<Nullable>enable</Nullable>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<Configurations>Debug;NewtonsoftJson;SystemTextJson</Configurations>
-	<Version>1.1.2</Version>
+	<Version>1.2.0</Version>
 	<Authors>ahjephson</Authors>
 	<Company>ahjephson</Company>
 	<RepositoryUrl>https://github.com/ahjephson/SlackMessageBuilder.git</RepositoryUrl>
@@ -43,10 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'" />
-	<PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
-    <PackageReference Include="System.Text.Json" Version="6.0.5" Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.3" Condition="'$(Configuration)|$(Platform)'=='NewtonsoftJson|AnyCPU'" />
+	<PackageReference Include="System.Text.Json" Version="9.0.3" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+    <PackageReference Include="System.Text.Json" Version="9.0.3" Condition="'$(Configuration)|$(Platform)'=='SystemTextJson|AnyCPU'" />
   </ItemGroup>
 
   <ItemGroup>
